@@ -1,18 +1,19 @@
 import {Injectable} from '@angular/core';
 import * as firebase from "firebase";
+import {DonneesService} from "./donnees.service";
 
 @Injectable({
   providedIn: 'root'
 })
 export class ConnexionService {
 
-  constructor() {
+  constructor(private donnee: DonneesService) {
   }
 
   creerNouvelUtilisateur(email: string, password: string) {
     return new Promise(
       (resolve, reject) => {
-        firebase.auth().createUserWithEmailAndPassword(email, password).then(
+         this.donnee.app.auth().createUserWithEmailAndPassword(email, password).then(
           () => {
             resolve();
           },
@@ -27,7 +28,7 @@ export class ConnexionService {
   connecterUtilisateur(email: string, password: string) {
     return new Promise(
       (resolve, reject) => {
-        firebase.auth().signInWithEmailAndPassword(email, password).then(
+        this.donnee.app.auth().signInWithEmailAndPassword(email, password).then(
           () => {
             resolve();
           },
@@ -40,7 +41,7 @@ export class ConnexionService {
   }
 
   deconnecterUtilisateur() {
-    firebase.auth().signOut();
+    this.donnee.app.auth().signOut();
   }
 
 }

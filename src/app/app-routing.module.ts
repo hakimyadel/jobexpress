@@ -11,11 +11,11 @@ import {AnnonceComponent} from "./annonce/annonce.component";
 
 const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
-  { path: 'accueil', canActivate: [AuthGuardService], component: AccueilComponent },
-  { path: 'edit/annonce', canActivate: [AuthGuardService], component: EditAnnonceComponent },
-  { path: 'edit/candidat', canActivate: [AuthGuardService], component: EditCandidatComponent },
-  { path: 'edit/entreprise', canActivate: [AuthGuardService], component: EditEntrepriseComponent },
-  { path: 'recherche', canActivate: [AuthGuardService], component: RechercheComponent },
+  { path: 'accueil', component: AccueilComponent },
+  { path: 'edit/annonce', component: EditAnnonceComponent },
+  { path: 'edit/candidat', component: EditCandidatComponent },
+  { path: 'edit/entreprise', component: EditEntrepriseComponent },
+  { path: 'recherche', component: RechercheComponent },
   { path: 'annonce', canActivate: [AuthGuardService], component: AnnonceComponent },
   { path: '', redirectTo: 'connexion', pathMatch: 'full' },
   { path: '**', redirectTo: 'connexion' }
