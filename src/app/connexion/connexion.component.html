@@ -1,24 +1,80 @@
-<div class="container">
-  <div class="row">
-    <div class="col align-self-center">
+<div class="card mx-auto p-3" style="width: 50rem;"  >
+  <form >
+    <div class="form-group">
 
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Adresse Email </label>
-          <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-          <small id="emailHelp" class="form-text text-muted">On  partagera  votre mail avec personne.</small>
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Mot de passe</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-
-        <button type="submit" class="btn btn-primary">Envoyer</button>
-      </form>
-      <div class="dropdown-divider"></div>
-      <a class="dropdown-item" href="#">Etes-vous nouveau ici? créé un compte</a>
-      <a class="dropdown-item" href="#">Mot de passe oublier?</a>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
     </div>
-  </div>
+    <div class="form-group">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </div>
+
+
+    <div class="form-group ">
+      <label for="selectWilaya">Domaine</label>
+      <select class="form-control" name="wilaya" id="selectWilaya">
+        <option value="tous">tous</option>
+        <option value="Alger">Alger</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="adrar">adrar</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+      </select>
+    </div>
+
+    <div class="form-group ">
+      <label for="selectDomaine">Domaine</label>
+      <select class="form-control" name="domaine" id="selectDomaine">
+        <option value="informatique">informatique</option>
+        <option value="médical">médical</option>
+        <option value="gestion">gestion</option>
+        <option value="biologie">biologie</option>
+        <option value="electronique">electronique</option>
+        <option value="mecanique">mecanique</option>
+        <option value="chimie">chimie</option>
+
+      </select>
+    </div>
+
+    <div class="form-group ">
+      <label for="selectExperience">Eexperience</label>
+      <select class="form-control" name="experience" id="selectExperience">
+        <option value="pasdexp">pas d'experience requise</option>
+        <option value="1ans">1ans</option>
+        <option value="1ans">2ans</option>
+        <option value="1ans">3ans ou plus</option>
+      </select>
+    </div>
+
+    <div class="form-group  ">
+      <label for="selectNiveau">Niveau</label>
+      <select class="form-control" name="niveau" id="selectNiveau">
+        <option value="bac+3">bac+3(minimum)</option>
+        <option value="1ans">bac+5</option>
+
+      </select>
+    </div>
+
+
+
+  </form>
 </div>
 
