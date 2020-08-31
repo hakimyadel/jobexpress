@@ -1,75 +1,79 @@
-<form class="form-inline my-2 my-lg-0">
-  <div class="form-group col">
+<div class="card mx-auto p-3 mt-5" style="width: 20rem;"  >
+  <form >
+    <div class="form-group">
 
-    <input class="form-control mr-sm-2" type="search" placeholder="Search"
-           aria-label="Search">
-    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search
-    </button>
-  </div>
-
-  <div class="form-group col">
-    Wilaya :&nbsp;
-    <select class="form-control" name="wilaya">
-      <option value="tous">tous</option>
-      <option value="Alger">Alger</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-      <option value="adrar">adrar</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-      <option value="sidi belabass">sidi belabass</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-      <option value="sidi belabass">sidi belabass</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-      <option value="sidi belabass">sidi belabass</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-      <option value="sidi belabass">sidi belabass</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-      <option value="sidi belabass">sidi belabass</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-      <option value="sidi belabass">sidi belabass</option>
-      <option value="tlemcen">tlemcen</option>
-      <option value="oran">oran</option>
-    </select>
-  </div>
-
-  <div class="form-group col">
-    Domaine :&nbsp;
-    <select class="form-control" name="domaine">
-      <option value="informatique">informatique</option>
-      <option value="médical">médical</option>
-      <option value="gestion">gestion</option>
-      <option value="biologie">biologie</option>
-      <option value="electronique">electronique</option>
-      <option value="mecanique">mecanique</option>
-      <option value="chimie">chimie</option>
-
-    </select>
-  </div>
-
-  <div class="form-group col">
-    Experience :&nbsp;
-    <select class="form-control" name="experience">
-      <option value="pasdexp">pas d'experience requise</option>
-      <option value="1ans">1ans</option>
-      <option value="1ans">2ans</option>
-      <option value="1ans">3ans ou plus</option>
-    </select>
-  </div>
-
-  <div class="form-group col">
-    Niveau :&nbsp;
-    <select class="form-control" name="niveau">
-      <option value="bac+3">bac+3(minimum)</option>
-      <option value="1ans">bac+5</option>
-
-    </select>
-  </div>
+      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+    </div>
 
 
-</form>
+    <div class="form-group ">
+      <label for="selectWilaya">Domaine</label>
+      <select class="form-control" name="wilaya" id="selectWilaya">
+        <option value="tous">tous</option>
+        <option value="Alger">Alger</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="adrar">adrar</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+        <option value="sidi belabass">sidi belabass</option>
+        <option value="tlemcen">tlemcen</option>
+        <option value="oran">oran</option>
+      </select>
+    </div>
+
+    <div class="form-group ">
+      <label for="selectDomaine">Domaine</label>
+      <select class="form-control" name="domaine" id="selectDomaine">
+        <option value="informatique">informatique</option>
+        <option value="médical">médical</option>
+        <option value="gestion">gestion</option>
+        <option value="biologie">biologie</option>
+        <option value="electronique">electronique</option>
+        <option value="mecanique">mecanique</option>
+        <option value="chimie">chimie</option>
+
+      </select>
+    </div>
+
+    <div class="form-group ">
+      <label for="selectExperience">Eexperience</label>
+      <select class="form-control" name="experience" id="selectExperience">
+        <option value="pasdexp">pas d'experience requise</option>
+        <option value="1ans">1ans</option>
+        <option value="1ans">2ans</option>
+        <option value="1ans">3ans ou plus</option>
+      </select>
+    </div>
+
+    <div class="form-group  ">
+      <label for="selectNiveau">Niveau</label>
+      <select class="form-control" name="niveau" id="selectNiveau">
+        <option value="bac+3">bac+3(minimum)</option>
+        <option value="1ans">bac+5</option>
+
+      </select>
+    </div>
+
+
+
+  </form>
+</div>
