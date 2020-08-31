@@ -1,8 +1,30 @@
-/* You can add global styles to this file, and also import other style files */
 body {
-  margin:0;
-  padding:0;
-  background: url(assets/images/background.jpg) no-repeat center fixed;
-  -webkit-background-size: cover; /* pour anciens Chrome et Safari */
-  background-size: cover; /* version standardisée */
+  background: url("assets/images/background.jpg") no-repeat center fixed;
+  background-size: cover;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
 }
+
+.site-content {
+  flex: 1;
+}
+footer{
+
+  background:#ccc;
+
+  position:relative;
+
+  bottom:0;
+
+  width:100%;
+
+  padding-top:50px;
+
+
+}
+html, body {
+  height: 100%;
+}
+
