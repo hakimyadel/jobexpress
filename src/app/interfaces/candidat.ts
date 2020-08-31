@@ -7,7 +7,7 @@ export interface Candidat {
   diplome: string
   niveau: number
   experience: number
-  wilaya: number
+  wilaya: string
   telephone: string
   description: string
 }

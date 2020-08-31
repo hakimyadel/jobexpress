@@ -11,8 +11,9 @@ import { AccueilComponent } from './accueil/accueil.component';
 import { EditAnnonceComponent } from './edit-annonce/edit-annonce.component';
 import { AnnonceComponent } from './annonce/annonce.component';
 import { RechercheComponent } from './recherche/recherche.component';
-import { CandidatComponent } from './accueil/candidat/candidat.component';
-import { EntrepriseComponent } from './accueil/entreprise/entreprise.component';
+import { CandidatComponent } from './candidat/candidat.component';
+import { EntrepriseComponent } from './entreprise/entreprise.component';
+import {FormsModule} from "@angular/forms";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { EntrepriseComponent } from './accueil/entreprise/entreprise.component';
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

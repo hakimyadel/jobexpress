@@ -8,6 +8,8 @@ import {EditCandidatComponent} from "./edit-candidat/edit-candidat.component";
 import {EditEntrepriseComponent} from "./edit-entreprise/edit-entreprise.component";
 import {RechercheComponent} from "./recherche/recherche.component";
 import {AnnonceComponent} from "./annonce/annonce.component";
+import {CandidatComponent} from "./candidat/candidat.component";
+import {EntrepriseComponent} from "./entreprise/entreprise.component";
 
 const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
@@ -16,9 +18,12 @@ const routes: Routes = [
   { path: 'edit/candidat', component: EditCandidatComponent },
   { path: 'edit/entreprise', component: EditEntrepriseComponent },
   { path: 'recherche', component: RechercheComponent },
-  { path: 'annonce', canActivate: [AuthGuardService], component: AnnonceComponent },
-  { path: '', redirectTo: 'connexion', pathMatch: 'full' },
-  { path: '**', redirectTo: 'connexion' }
+  //{ path: 'annonce', canActivate: [AuthGuardService], component: AnnonceComponent },
+  { path: 'annonce', component: AnnonceComponent },
+  { path: 'candidat', component: CandidatComponent },
+  { path: 'entreprise', component: EntrepriseComponent },
+  { path: '', redirectTo: 'accueil', pathMatch: 'full' },
+  { path: '**', redirectTo: 'accueil' }
 ];
 
 @NgModule({

@@ -1,56 +1,93 @@
-<div class="card mx-auto p-3" style="width: 50rem;"  >
+<div class="card mx-auto p-3" style="width: 50rem;">
+  <form (ngSubmit)="creerCandidat()" >
 
-
-  <form>
-    <div class="form-group ">
-      <label for="inputEmail4">Email</label>
-      <input type="email" class="form-control" id="inputEmail4" placeholder="name@gmail.com" required>
-    </div>
     <div class="form-row ">
       <div class="form-group col-md-6">
-        <label for="inputPassword4">Mot de passe</label>
-        <input type="password" class="form-control" id="inputPassword4" required>
+        <label for="nom">Nom</label>
+        <input type="text" class="form-control" id="nom" name="nom"
+               minlength="2" maxlength="20"required [(ngModel)]="candidat.nom">
       </div>
       <div class="form-group col-md-6">
-        <label for="inputPassword5">Confirmé le mot de passe</label>
-        <input type="password" class="form-control" id="inputPassword5" required>
+        <label for="prenom">Prénom</label>
+        <input type="text" class="form-control" id="prenom" name="prenom"
+               minlength="2" maxlength="20" required [(ngModel)]="candidat.prenom">
       </div>
     </div>
-    <div class="form-group">
-      <label for="inputAddress">Lieu de résidence</label>
-      <input type="text" class="form-control" id="inputAddress" placeholder="Alger" required>
-    </div>
+
     <div class="form-group ">
-      <label for="inputEmail5">Email pro</label>
-      <input type="email" class="form-control" id="inputEmail5" placeholder="name@gmail.com" required>
+      <label for="age">Age</label>
+      <input type="number" class="form-control" id="age" name="age"
+            min="18" max="80" required [(ngModel)]="candidat.age">
     </div>
+
+    <div class="form-group ">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" id="email" name="email"
+             pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
+             placeholder="name@gmail.com" required [(ngModel)]="candidat.email">
+    </div>
+
+    <div class="form-row ">
+      <div class="form-group col-md-6">
+        <label for="password">Mot de passe</label>
+        <input type="password" class="form-control" id="password" name="password"
+               minlength="6" maxlength="20" required [(ngModel)]="candidat.password">
+      </div>
+      <div class="form-group col-md-6">
+        <label for="passwordConfirm">Confirmé le mot de passe</label>
+        <input type="password" class="form-control" id="passwordConfirm"
+               minlength="6" maxlength="20" required>
+      </div>
+    </div>
+
     <div class="form-group">
-      <label for="inputTel">Numéro de téléphone</label >
-      <input type="number" class="form-control" id="inputTel" required >
+      <label for="wilaya">Wilaya de résidence</label>
+      <select class="form-control" name="wilaya" id="wilaya" required >
+        <option  value="tlemcen">Tlemcen</option>
+      </select>
     </div>
+
     <div class="form-group">
-      <label for="inputDiplome">Diplome en</label>
-      <input type="text" class="form-control" id="inputDiplome" required>
+      <label for="inputTel">Numéro de téléphone</label>
+      <input type="text" class="form-control" id="inputTel" name="telphone" required
+             pattern="0[5-7][0-9]{8}" [(ngModel)]="candidat.telephone">
     </div>
+
     <div class="form-group">
-      <label for="inputSpecialite">Spécialité</label>
-      <input type="text" class="form-control" id="inputSpecialite" required>
+      <label for="inputDiplome">Diplôme</label>
+      <input type="text" class="form-control" id="inputDiplome" name="diplome" required
+             minlength="4" [(ngModel)]="candidat.diplome">
     </div>
+
     <div class="form-group">
       <label for="SelectNiveau">Niveau</label>
       <select class="form-control" name="niveau" id="selectNiveau" required>
-        <option value="bac+3">bac+3(Licence)</option>
-        <option value="1ans">bac+5 (master)</option>
+        <option value="3">bac+3(Licence)</option>
+        <option value="5">bac+5 (master)</option>
       </select>
     </div>
+
     <div class="form-group">
-      <label for="exampleFormControlTextarea1">Plus de details sur le C.V</label>
-      <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+      <label for="experience">Expérience</label>
+      <select class="form-control" name="experience" id="experience" required >
+        <option  value="2">2 ans</option>
+      </select>
     </div>
+
     <div class="form-group">
-      <label for="exampleFormControlFile1">Ajouter une image a votre profil</label>
+      <label for="description">Plus de details sur le
+        C.V</label>
+      <textarea class="form-control" id="description" name="description"
+                rows="3" [(ngModel)]="candidat.description"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="exampleFormControlFile1">Ajouter une image a votre
+        profil</label>
       <input type="file" class="form-control-file" id="exampleFormControlFile1">
     </div>
-    <button type="submit" class="btn btn-primary ">Sign in</button>
+
+    <button type="submit" class="btn btn-primary ">Créer le profile</button>
+
   </form>
 </div>

@@ -4,7 +4,7 @@ export interface Entreprise {
   password: string
   creation: Date
   domaine: string
-  wilaya: number
+  wilaya: string
   telephone: string
   description: string
   annonces: string[]

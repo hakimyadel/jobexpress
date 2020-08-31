@@ -3,7 +3,7 @@ export interface Annonce {
   domaine: string
   niveau: number
   experience: number
-  wilaya: number
+  wilaya: string
   telephone: string
   image: string
   description: string
