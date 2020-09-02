@@ -1,7 +1,6 @@
 import {Component, OnInit} from '@angular/core';
-import {ConnexionService} from "../services/connexion.service";
-import {DonneesService} from "../services/donnees.service";
 import {Router} from "@angular/router";
+import {FirebaseAppService} from "../services/firebase-app.service";
 
 @Component({
   selector: 'app-connexion',
@@ -13,7 +12,7 @@ export class ConnexionComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private connexion: ConnexionService, private donnee: DonneesService ,private router : Router) {
+  constructor(private api: FirebaseAppService ,private router : Router) {
     this.email = '';
     this.password = '';
 
@@ -23,15 +22,33 @@ export class ConnexionComponent implements OnInit {
   }
 
   seConnecter() {
-    this.connexion.connecterUtilisateur(this.email, this.password);
-    if(this.connexion.authentification){
-      this.router.navigate(['candidat']);
-    } else{
-      alert('le mot de passe est incorrect');
-    }
+        let that = this;
+        this.api.app.auth().signInWithEmailAndPassword(this.email, this.password)
+          .then(function (result) {
+            let user = result.user
+            //if(user.emailVerified){
+              if(user.displayName === 'candidat'){
+                that.router.navigate(['candidat'])
+              }else if(user.displayName === 'entreprise') {
+                that.router.navigate(['entreprise'])
+              }else{
+                that.router.navigate(['administration'])
+              }
+            /*} else {
+              that.api.app.auth().signOut();
+              alert('Votre adresse Email n\'est pas encore vérifiée');
+            }*/
+          })
+          .catch(function (error) {
+            alert(error)
+          })
+
   }
 
-  seDeconnecter() {
-    this.connexion.deconnecterUtilisateur();
+  updatename() {
+    this.api.app.auth().currentUser.updateProfile( {displayName: 'candidat'});
   }
+
+
+
 }

@@ -22,6 +22,7 @@ const routes: Routes = [
   { path: 'annonce', component: AnnonceComponent },
   { path: 'candidat', component: CandidatComponent },
   { path: 'entreprise', component: EntrepriseComponent },
+  { path: 'adminisration', component: AccueilComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: '**', redirectTo: 'accueil' }
 ];

@@ -1,23 +1,24 @@
 <div class="card mx-auto p-3 mt-5" style="width: 50rem;">
-  <form #candidatForm = "ngForm" (ngSubmit)="creerCandidat()" >
+  <form #candidatForm="ngForm" (ngSubmit)="creerCandidat()">
 
     <div class="form-row ">
       <div class="form-group col-md-6">
         <label for="nom">Nom</label>
         <input type="text" class="form-control" id="nom" name="nom"
-               minlength="2" maxlength="20"required [(ngModel)]="candidat.nom">
+               minlength="2" maxlength="20" required [(ngModel)]="candidat.nom">
       </div>
       <div class="form-group col-md-6">
         <label for="prenom">Prénom</label>
         <input type="text" class="form-control" id="prenom" name="prenom"
-               minlength="2" maxlength="20" required [(ngModel)]="candidat.prenom">
+               minlength="2" maxlength="20" required
+               [(ngModel)]="candidat.prenom">
       </div>
     </div>
 
     <div class="form-group ">
-      <label for="age">Age</label>
-      <input type="number" class="form-control" id="age" name="age"
-            min="18" max="80" required [(ngModel)]="candidat.age">
+      <label for="naissance">Date de naissance</label>
+      <input type="date" class="form-control" id="naissance" name="naissance"
+             required [(ngModel)]="candidat.naissance">
     </div>
 
     <div class="form-group ">
@@ -30,47 +31,57 @@
     <div class="form-row ">
       <div class="form-group col-md-6">
         <label for="password">Mot de passe</label>
-        <input type="password" class="form-control" id="password" name="password"
-               minlength="6" maxlength="20" required [(ngModel)]="candidat.password">
+        <input type="password" class="form-control" id="password"
+               name="password"
+               minlength="6" maxlength="20" required
+               [(ngModel)]="candidat.password">
       </div>
       <div class="form-group col-md-6">
         <label for="passwordConfirm">Confirmé le mot de passe</label>
         <input type="password" class="form-control" id="passwordConfirm"
-               minlength="6" maxlength="20" required>
+               minlength="6" maxlength="20" name="confirmPassword"
+               [(ngModel)]="confirmPassword" required>
       </div>
     </div>
 
     <div class="form-group">
       <label for="wilaya">Wilaya de résidence</label>
-      <select class="form-control" name="wilaya" id="wilaya" required [(ngModel)]="candidat.wilaya">
-        <option *ngFor="let wilaya of wilayas" [value]="wilaya">{{wilaya | titlecase}}</option>
+      <select class="form-control" name="wilaya" id="wilaya" required
+              [(ngModel)]="candidat.wilaya">
+        <option *ngFor="let wilaya of wilayas"
+                [value]="wilaya">{{wilaya | titlecase}}</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="inputTel">Numéro de téléphone</label>
-      <input type="text" class="form-control" id="inputTel" name="telphone" required
+      <input type="text" class="form-control" id="inputTel" name="telphone"
+             required
              pattern="0[5-7][0-9]{8}" [(ngModel)]="candidat.telephone">
     </div>
 
     <div class="form-group">
       <label for="inputDiplome">Diplôme</label>
-      <input type="text" class="form-control" id="inputDiplome" name="diplome" required
+      <input type="text" class="form-control" id="inputDiplome" name="diplome"
+             required
              minlength="4" [(ngModel)]="candidat.diplome">
     </div>
 
     <div class="form-group">
       <label for="SelectNiveau">Niveau</label>
-      <select class="form-control" name="niveau" id="selectNiveau" required>
-        <option value="3">bac+3(Licence)</option>
-        <option value="5">bac+5 (master)</option>
+      <select class="form-control" name="niveau" id="selectNiveau"
+              required [(ngModel)]="candidat.niveau">
+        <option *ngFor="let niveau of niveaux ; let i = index"
+                [value]="i">{{niveau}}</option>
       </select>
     </div>
 
     <div class="form-group">
       <label for="experience">Expérience</label>
-      <select class="form-control" name="experience" id="experience" required >
-        <option  value="2">2 ans</option>
+      <select class="form-control" name="experience" id="experience"
+              required [(ngModel)]="candidat.experience">
+        <option *ngFor="let experience of experiences ; let i = index"
+                [value]="i">{{experience}}</option>
       </select>
     </div>
 
@@ -87,7 +98,10 @@
       <input type="file" class="form-control-file" id="exampleFormControlFile1">
     </div>
 
-    <button type="submit" [disabled]="!candidatForm.form.valid" class="btn btn-primary mr-auto">Créer le profile</button>
+    <button type="submit"
+            [disabled]="!(candidatForm.form.valid && candidat.password === confirmPassword)"
+            class="btn btn-primary mr-auto">Créer le profile
+    </button>
 
   </form>
 </div>

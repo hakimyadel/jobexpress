@@ -3,11 +3,12 @@ export interface Candidat {
   prenom: string
   email: string
   password: string
-  age: number
+  naissance: Date
   diplome: string
   niveau: number
   experience: number
   wilaya: string
   telephone: string
   description: string
+  userId: string
 }
