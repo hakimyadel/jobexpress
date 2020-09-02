@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {Candidat} from "../interfaces/candidat";
 import {DonneesService} from "../services/donnees.service";
 
+
+
 @Component({
   selector: 'app-edit-candidat',
   templateUrl: './edit-candidat.component.html',
@@ -9,15 +11,16 @@ import {DonneesService} from "../services/donnees.service";
 })
 export class EditCandidatComponent implements OnInit {
   candidat: Candidat;
+  wilayas = ['tlemcen', 'alger' , 'oran'];
 
   constructor(private donnee : DonneesService) {
     this.candidat = {
       nom: '',
       prenom: '',
-      age: null,
+      age: 0,
       email : '',
       password: '',
-      wilaya: '',
+      wilaya: null,
       telephone: '',
       diplome: '',
       niveau : null,

@@ -19,7 +19,7 @@ export class AuthGuardService {
             if(user) {
               resolve(true);
             } else {
-              this.router.navigate(['/auth', 'signin']);
+              this.router.navigate(['/']);
               resolve(false);
             }
           }

@@ -1,17 +1,21 @@
 <div class="card mx-auto mt-5 p-3" style="width: 50rem;"  >
-  <form>
+  <form (ngSubmit)="seConnecter()">
     <div class="form-group">
       <label for="exampleInputEmail1">Adresse Email </label>
-      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+      <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+             [(ngModel)]="email" aria-describedby="emailHelp" placeholder="Enter email">
       <small id="emailHelp" class="form-text text-muted">On  partagera  votre mail avec personne.</small>
     </div>
     <div class="form-group">
       <label for="exampleInputPassword1">Mot de passe</label>
-      <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+      <input type="password" class="form-control" id="exampleInputPassword1"
+             name="password" [(ngModel)]="password"placeholder="Password">
     </div>
 
-    <button type="submit" class="btn btn-primary">Envoyer</button>
+    <button type="submit"  class="btn btn-primary">se connecter</button>
   </form>
+
+    <button (click)="seDeconnecter()">se deconnecter</button>
   <div class="dropdown-divider"></div>
   <a class="dropdown-item" href="#">Etes-vous nouveau ici? créé un compte</a>
   <a class="dropdown-item" href="#">Mot de passe oublier?</a>

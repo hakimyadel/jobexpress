@@ -1,5 +1,4 @@
 import {Injectable} from '@angular/core';
-import * as firebase from "firebase";
 import {DonneesService} from "./donnees.service";
 
 @Injectable({
@@ -7,7 +6,19 @@ import {DonneesService} from "./donnees.service";
 })
 export class ConnexionService {
 
+  authentification : boolean;
+
   constructor(private donnee: DonneesService) {
+    this.donnee.app.auth().onAuthStateChanged(
+      (user) => {
+        if(user) {
+          this.authentification = true;
+        } else {
+          this.authentification = false;
+        }
+      }
+    );
+
   }
 
   creerNouvelUtilisateur(email: string, password: string) {

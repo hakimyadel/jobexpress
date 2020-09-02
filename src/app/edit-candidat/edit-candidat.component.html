@@ -1,5 +1,5 @@
 <div class="card mx-auto p-3 mt-5" style="width: 50rem;">
-  <form (ngSubmit)="creerCandidat()" >
+  <form #candidatForm = "ngForm" (ngSubmit)="creerCandidat()" >
 
     <div class="form-row ">
       <div class="form-group col-md-6">
@@ -42,8 +42,8 @@
 
     <div class="form-group">
       <label for="wilaya">Wilaya de résidence</label>
-      <select class="form-control" name="wilaya" id="wilaya" required >
-        <option  value="tlemcen">Tlemcen</option>
+      <select class="form-control" name="wilaya" id="wilaya" required [(ngModel)]="candidat.wilaya">
+        <option *ngFor="let wilaya of wilayas" [value]="wilaya">{{wilaya | titlecase}}</option>
       </select>
     </div>
 
@@ -87,7 +87,7 @@
       <input type="file" class="form-control-file" id="exampleFormControlFile1">
     </div>
 
-    <button type="submit" class="btn btn-primary ">Créer le profile</button>
+    <button type="submit" [disabled]="!candidatForm.form.valid" class="btn btn-primary mr-auto">Créer le profile</button>
 
   </form>
 </div>
