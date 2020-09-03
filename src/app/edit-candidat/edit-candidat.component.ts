@@ -1,6 +1,5 @@
 import {Component, OnInit} from '@angular/core';
 import {Candidat} from "../interfaces/candidat";
-import {DonneesService} from "../services/donnees.service";
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
 import {wilayas, niveaux, experiences} from "../interfaces/constantes";
@@ -21,7 +20,7 @@ export class EditCandidatComponent implements OnInit {
   imageuRL: string;
 
 
-  constructor(private donnee: DonneesService, private api: FirebaseAppService, private router: Router) {
+  constructor( private api: FirebaseAppService, private router: Router) {
     this.candidat = {
       nom: 'abi ayad',
       prenom: 'fethi',
@@ -46,9 +45,10 @@ export class EditCandidatComponent implements OnInit {
     let that = this;
     this.api.app.auth().createUserWithEmailAndPassword(this.candidat.email, this.candidat.password)
       .then(function (result) {
-        result.user.updateProfile({displayName: 'candidat'});
+        const newKey = that.api.app.database().ref().child('/candidat').push().key;
+        result.user.updateProfile({displayName: 'candidat', photoURL: newKey});
         that.candidat.userId = result.user.uid;
-        that.donnee.ajouterCandidat(that.candidat);
+        that.api.app.database().ref().child('/candidat').child(newKey).set(that.candidat);
         result.user.sendEmailVerification().then(function () {
           console.log('email de verification envoyé')
           that.api.app.auth().signOut();

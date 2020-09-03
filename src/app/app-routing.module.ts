@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'recherche', component: RechercheComponent },
   //{ path: 'annonce', canActivate: [AuthGuardService], component: AnnonceComponent },
   { path: 'annonce', component: AnnonceComponent },
-  { path: 'candidat', component: CandidatComponent },
+  { path: 'candidat', canActivate: [AuthGuardService], component: CandidatComponent },
   { path: 'entreprise', component: EntrepriseComponent },
   { path: 'adminisration', component: AccueilComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },

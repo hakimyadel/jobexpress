@@ -23,17 +23,13 @@ export class ConnexionComponent implements OnInit {
 
   seConnecter() {
         let that = this;
+        this.api.app.auth().signOut();
         this.api.app.auth().signInWithEmailAndPassword(this.email, this.password)
           .then(function (result) {
+            console.log(result.user)
             let user = result.user
             //if(user.emailVerified){
-              if(user.displayName === 'candidat'){
-                that.router.navigate(['candidat'])
-              }else if(user.displayName === 'entreprise') {
-                that.router.navigate(['entreprise'])
-              }else{
-                that.router.navigate(['administration'])
-              }
+                that.router.navigate([user.displayName])
             /*} else {
               that.api.app.auth().signOut();
               alert('Votre adresse Email n\'est pas encore vérifiée');

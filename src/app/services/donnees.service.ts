@@ -1,6 +1,5 @@
 import {Injectable} from '@angular/core';
 import {Annonce} from "../interfaces/annonce";
-import {Candidat} from "../interfaces/candidat";
 import {Entreprise} from "../interfaces/entreprise";
 import {FirebaseAppService} from "./firebase-app.service";
 
@@ -23,10 +22,6 @@ export class DonneesService {
     const newKey = this.api.app.database().ref().child('/annonces').push().key;
     this.api.app.database().ref().child('/annonces').child(newKey).set(annonce);
     this.api.app.database().ref().child('/entreprises').child(idEntreprise).child('annonces').push(newKey);
-  }
-
-  ajouterCandidat(candidat: Candidat) {
-    this.api.app.database().ref().child('/candidats').push(candidat);
   }
 
 }
