@@ -10,5 +10,6 @@ export interface Candidat {
   wilaya: string
   telephone: string
   description: string
+  image: string
   userId: string
 }

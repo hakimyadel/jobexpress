@@ -93,9 +93,12 @@
     </div>
 
     <div class="form-group">
-      <label for="exampleFormControlFile1">Ajouter une image a votre
+      <label for="controleFile">Ajouter une image a votre
         profil</label>
-      <input type="file" class="form-control-file" id="exampleFormControlFile1">
+      <input type="file" class="form-control-file" id="controleFile"
+             accept="image/png, image/jpeg" (change)="uploadFile($event)">
+      <img src="{{candidat.image}}" alt="photo du profile" width="200px">
+
     </div>
 
     <button type="submit"

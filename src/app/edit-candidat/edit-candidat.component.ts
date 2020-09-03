@@ -18,6 +18,8 @@ export class EditCandidatComponent implements OnInit {
   experiences = experiences
   confirmPassword: string;
 
+  imageuRL: string;
+
 
   constructor(private donnee: DonneesService, private api: FirebaseAppService, private router: Router) {
     this.candidat = {
@@ -32,6 +34,7 @@ export class EditCandidatComponent implements OnInit {
       niveau: null,
       experience: null,
       description: '',
+      image: 'assets/images/photoProfile.jpg',
       userId: null
     }
   }
@@ -57,5 +60,25 @@ export class EditCandidatComponent implements OnInit {
         alert(error)
       });
   }
+
+  uploadFile(event) {
+    const file = event.target.files[0];
+    let that = this;
+    const almostUniqueFileName = Date.now().toString();
+    const upload = this.api.app.storage().ref()
+      .child('images/' + almostUniqueFileName + file.name).put(file);
+    upload.on('state_changed', function (snapshot) {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+    }, function (error) {
+      console.log(error)
+    }, function () {
+      upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        that.candidat.image = downloadURL
+      });
+    });
+  }
+
+
 
 }
