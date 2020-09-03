@@ -1,4 +1,5 @@
-<div class="card mx-auto mt-5 p-3" style="width: 50rem;"  >
+
+  <div class="card mx-auto mt-5 p-3" style="width: 23rem;"  >
   <form (ngSubmit)="seConnecter()">
     <div class="form-group">
       <label for="exampleInputEmail1">Adresse Email </label>
@@ -11,11 +12,14 @@
       <input type="password" class="form-control" id="exampleInputPassword1"
              name="password" [(ngModel)]="password"placeholder="Password">
     </div>
+<div class="text-center">
+  <button type="submit"  class="btn btn-primary">se connecter</button>
+</div>
 
-    <button type="submit"  class="btn btn-primary">se connecter</button>
   </form>
 
-  <div class="dropdown-divider"></div>
+  <div class="dropdown-divider "></div>
   <a class="dropdown-item" href="#">Etes-vous nouveau ici? créé un compte</a>
   <a class="dropdown-item" href="#">Mot de passe oublier?</a>
 </div>
+

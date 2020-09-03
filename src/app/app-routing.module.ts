@@ -21,7 +21,7 @@ const routes: Routes = [
   //{ path: 'annonce', canActivate: [AuthGuardService], component: AnnonceComponent },
   { path: 'annonce', component: AnnonceComponent },
   { path: 'candidat', canActivate: [AuthGuardService], component: CandidatComponent },
-  { path: 'entreprise', component: EntrepriseComponent },
+  { path: 'entreprise', canActivate: [AuthGuardService], component: EntrepriseComponent },
   { path: 'adminisration', component: AccueilComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: '**', redirectTo: 'accueil' }
