@@ -7,13 +7,8 @@
         <input type="text" class="form-control" id="nom" name="nom" #nom="ngModel"
                minlength="2" maxlength="20" required [(ngModel)]="candidat.nom">
         <div *ngIf="nom.invalid &&  nom.touched"
-             class="alert alert-danger mt-1">
-          <div *ngIf="nom.errors.required">
-            Ce champs est obligatoire !
-          </div>
-          <div *ngIf="nom.errors.minlength || nom.errors.maxlength">
+             class="alert alert-danger mt-2">
             Ce champs doit contenir entre 2 et 20 caractères !
-          </div>
         </div>
       </div>
 
@@ -23,13 +18,8 @@
                minlength="2" maxlength="20" required #prenom="ngModel"
                [(ngModel)]="candidat.prenom">
         <div *ngIf="prenom.invalid &&  prenom.touched"
-             class="alert alert-danger mt-1">
-          <div *ngIf="prenom.errors.required">
-            Ce champs est obligatoire !
-          </div>
-          <div *ngIf="prenom.errors.minlength || prenom.errors.maxlength">
+             class="alert alert-danger mt-2">
             Ce champs doit contenir entre 2 et 20 caractères !
-          </div>
         </div>
       </div>
     </div>
@@ -37,7 +27,11 @@
     <div class="form-group ">
       <label for="naissance">Date de naissance</label>
       <input type="date" class="form-control" id="naissance" name="naissance"
-             required [(ngModel)]="candidat.naissance">
+             required [(ngModel)]="candidat.naissance" #naissance="ngModel">
+      <div *ngIf="naissance.invalid &&  naissance.touched"
+           class="alert alert-danger mt-2">
+        Ce champs doit contenir votre date de naissance !
+      </div>
     </div>
 
     <div class="form-group ">
@@ -105,8 +99,7 @@
     </div>
 
     <div class="form-group">
-      <label for="description">Plus de details sur le
-        C.V</label>
+      <label for="description">Plus de details sur le C.V</label>
       <textarea class="form-control" id="description" name="description"
                 rows="3" [(ngModel)]="candidat.description"></textarea>
     </div>
@@ -117,7 +110,6 @@
       <input type="file" class="form-control-file" id="controleFile"
              accept="image/png, image/jpeg" (change)="uploadFile($event)">
       <img src="{{candidat.image}}" alt="photo du profile" width="200px">
-
     </div>
 
     <button type="submit"

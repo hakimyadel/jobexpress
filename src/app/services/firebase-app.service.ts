@@ -17,6 +17,7 @@ const firebaseConfig = {
 export class FirebaseAppService {
 
   app: firebase.app.App;
+
   constructor() {
     this.app = firebase.initializeApp(firebaseConfig);
   }

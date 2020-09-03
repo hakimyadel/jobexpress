@@ -17,9 +17,6 @@ export class EditCandidatComponent implements OnInit {
   experiences = experiences
   confirmPassword: string;
 
-  imageuRL: string;
-
-
   constructor( private api: FirebaseAppService, private router: Router) {
     this.candidat = {
       nom: 'abi ayad',
@@ -45,20 +42,23 @@ export class EditCandidatComponent implements OnInit {
     let that = this;
     this.api.app.auth().createUserWithEmailAndPassword(this.candidat.email, this.candidat.password)
       .then(function (result) {
+        console.log('reponse recu');
         const newKey = that.api.app.database().ref().child('/candidat').push().key;
         result.user.updateProfile({displayName: 'candidat', photoURL: newKey});
         that.candidat.userId = result.user.uid;
         that.api.app.database().ref().child('/candidat').child(newKey).set(that.candidat);
         result.user.sendEmailVerification().then(function () {
-          console.log('email de verification envoyé')
+          alert('Un lien de vérification a été envoyé à votre boite email. Veuillez le confirmer pour pouvoir accéder à votre compte ')
           that.api.app.auth().signOut();
           that.router.navigate(['connexion'])
         }).catch(function (error) {
         });
       })
       .catch(function (error) {
+        console.log('erreur requette 1')
         alert(error)
       });
+    console.log('hakim');
   }
 
   uploadFile(event) {
