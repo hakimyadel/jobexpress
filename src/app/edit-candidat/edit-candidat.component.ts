@@ -16,22 +16,34 @@ export class EditCandidatComponent implements OnInit {
   niveaux = niveaux;
   experiences = experiences
   confirmPassword: string;
+  auth: boolean
 
-  constructor( private api: FirebaseAppService, private router: Router) {
-    this.candidat = {
-      nom: 'abi ayad',
-      prenom: 'fethi',
-      naissance: null,
-      email: 'fethipharm010@gmail.com',
-      password: 'qwerty',
-      wilaya: null,
-      telephone: '0555555555',
-      diplome: 'pharmacien',
-      niveau: null,
-      experience: null,
-      description: '',
-      image: 'assets/images/photoProfile.jpg',
-      userId: null
+  constructor(private api: FirebaseAppService, private router: Router) {
+    const that = this;
+    this.auth = localStorage.getItem('user') === 'candidat';
+    if (this.auth) {
+      this.api.app.database().ref().child('candidat').child(localStorage.getItem('key'))
+        .once('value', function (snapshot) {
+          that.candidat = snapshot.val();
+        }).catch(function (error) {
+        console.log(error);
+      });
+    } else {
+      this.candidat = {
+        nom: '',
+        prenom: '',
+        naissance: null,
+        email: '',
+        password: '',
+        wilaya: null,
+        telephone: '',
+        diplome: '',
+        niveau: null,
+        experience: null,
+        description: '',
+        image: 'assets/images/photoProfile.jpg',
+        userId: null
+      }
     }
   }
 
@@ -42,7 +54,6 @@ export class EditCandidatComponent implements OnInit {
     let that = this;
     this.api.app.auth().createUserWithEmailAndPassword(this.candidat.email, this.candidat.password)
       .then(function (result) {
-        console.log('reponse recu');
         const newKey = that.api.app.database().ref().child('/candidat').push().key;
         result.user.updateProfile({displayName: 'candidat', photoURL: newKey});
         that.candidat.userId = result.user.uid;
@@ -55,10 +66,8 @@ export class EditCandidatComponent implements OnInit {
         });
       })
       .catch(function (error) {
-        console.log('erreur requette 1')
         alert(error)
       });
-    console.log('hakim');
   }
 
   uploadFile(event) {
@@ -79,6 +88,9 @@ export class EditCandidatComponent implements OnInit {
     });
   }
 
-
-
+  updateProfile() {
+    this.api.app.database().ref().child('/candidat')
+      .child(localStorage.getItem('key')).set(this.candidat);
+    this.router.navigate(['candidat'])
+  }
 }

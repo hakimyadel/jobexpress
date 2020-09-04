@@ -11,7 +11,8 @@
     <p><b>Wilaya de résidence</b> : {{candidat.wilaya}}</p>
     <p><b>Numero de téléphone</b> : {{candidat.telephone}}</p>
     <br><br>
-    <button type="button" class="btn btn-outline-dark">Modifier mon profil</button>&nbsp;
+    <button type="button" class="btn btn-outline-dark"
+            (click)="editerProfile()">Modifier mon profil</button>&nbsp;
     <button type="button" class="btn btn-outline-danger">Supprimer mon profil</button>
     <button type="button" class="btn btn-outline-danger"(click)="seDeconnecter()">Se déconnecter</button>
   </div>

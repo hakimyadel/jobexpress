@@ -46,4 +46,8 @@ export class CandidatComponent implements OnInit {
     localStorage.setItem('key', null);
     this.router.navigate(['connexion']);
   }
+
+  editerProfile(){
+    this.router.navigate(['edit/candidat']);
+  }
 }
