@@ -23,7 +23,12 @@ export class EditEntrepriseComponent implements OnInit {
       domaine: '',
       wilaya: '',
       telephone: '',
-      description: ''}
+      adresse: '',
+      description: '',
+      image: '',
+      annonces : [],
+      userId: null
+    }
   }
 
   ngOnInit(): void {

@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ConnexionComponent} from "./connexion/connexion.component";
 import {AccueilComponent} from "./accueil/accueil.component";
-import {AuthGuardService} from "./services/auth-guard.service";
 import {EditAnnonceComponent} from "./edit-annonce/edit-annonce.component";
 import {EditCandidatComponent} from "./edit-candidat/edit-candidat.component";
 import {EditEntrepriseComponent} from "./edit-entreprise/edit-entreprise.component";
@@ -10,6 +9,7 @@ import {RechercheComponent} from "./recherche/recherche.component";
 import {AnnonceComponent} from "./annonce/annonce.component";
 import {CandidatComponent} from "./candidat/candidat.component";
 import {EntrepriseComponent} from "./entreprise/entreprise.component";
+import {AuthCandidatService} from "./services/auth-candidat.service";
 
 const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },

@@ -26,13 +26,13 @@ export class ConnexionComponent implements OnInit {
       .then(function (result) {
         let user = result.user
         that.api.app.auth().signOut();
-        if (user.emailVerified) {
+        /*if (user.emailVerified) {*/
           localStorage.setItem('user', user.displayName);
           localStorage.setItem('key', user.photoURL);
           that.router.navigate([user.displayName])
-        } else {
+        /*} else {
           alert('Votre adresse Email n\'est pas encore vérifiée');
-        }
+        }*/
       })
       .catch(function (error) {
         alert(error)

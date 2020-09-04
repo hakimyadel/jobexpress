@@ -1,4 +1,4 @@
-<div class="card mx-auto p-3 mt-5" style="width: 50rem;"  >
+<div class="card mx-auto p-3 mt-5" style="width: 50rem;">
   <form #entrepriseForm="ngForm" (ngSubmit)="creerEntreprise()">
     <div class="form-group ">
       <label for="nom">Nom</label>
@@ -21,7 +21,8 @@
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" name="email"
                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
-               placeholder="name@gmail.com" required [(ngModel)]="entreprise.email" #email="ngModel">
+               placeholder="name@gmail.com" required
+               [(ngModel)]="entreprise.email" #email="ngModel">
         <div *ngIf="email.invalid &&  email.touched"
              class="alert alert-danger mt-2">
           veuillez saisir un email écrit sous la forme : name@gmail.com !
@@ -37,42 +38,44 @@
                  [(ngModel)]="entreprise.password" #password="ngModel">
           <div *ngIf="password.invalid &&  password.touched"
                class="alert alert-danger mt-2">
-            veuillez saisir un mot de passe  !
+            veuillez saisir un mot de passe !
           </div>
         </div>
         <div class="form-group col-md-6">
           <label for="passwordConfirm">Confirmé le mot de passe</label>
           <input type="password" class="form-control" id="passwordConfirm"
                  minlength="6" maxlength="20" name="confirmPassword"
-                 [(ngModel)]="confirmPassword" required #confirmpassword="ngModel">
+                 [(ngModel)]="confirmPassword" required
+                 #confirmpassword="ngModel">
           <div *ngIf="confirmpassword.invalid &&  confirmpassword.touched"
                class="alert alert-danger mt-2">
-            veuillez confirmer le mot de passe  !
+            veuillez confirmer le mot de passe !
           </div>
         </div>
       </div>
       <div class="form-row">
-    <div class="form-group col">
-      <label for="Address">Address</label>
-      <input type="text" class="form-control" id="Address" name="adresse" placeholder="1234 Main St"required
-             [(ngModel)]="entreprise.adresse" #adresse="ngModel">
-      <div *ngIf="adresse.invalid &&  adresse.touched"
-           class="alert alert-danger mt-2">
-        veuillez remplir le champ adresse  !
-      </div>
-    </div>
-      <div class="form-group col">
-        <label for="wilaya">Wilaya de résidence</label>
-        <select class="form-control" name="wilaya" id="wilaya" required
-                [(ngModel)]="entreprise.wilaya" #wilaya="ngModel">
-          <option *ngFor="let wilaya of wilayas"
-                  [value]="wilaya">{{wilaya | titlecase}}</option>
-        </select>
-        <div *ngIf="wilaya.invalid &&  wilaya.touched"
-             class="alert alert-danger mt-2">
-          veuillez saisir une wilaya !
+        <div class="form-group col">
+          <label for="Address">Address</label>
+          <input type="text" class="form-control" id="Address" name="adresse"
+                 placeholder="1234 Main St" required
+                 [(ngModel)]="entreprise.adresse" #adresse="ngModel">
+          <div *ngIf="adresse.invalid &&  adresse.touched"
+               class="alert alert-danger mt-2">
+            veuillez remplir le champ adresse !
+          </div>
         </div>
-      </div>
+        <div class="form-group col">
+          <label for="wilaya">Wilaya de résidence</label>
+          <select class="form-control" name="wilaya" id="wilaya" required
+                  [(ngModel)]="entreprise.wilaya" #wilaya="ngModel">
+            <option *ngFor="let wilaya of wilayas"
+                    [value]="wilaya">{{wilaya | titlecase}}</option>
+          </select>
+          <div *ngIf="wilaya.invalid &&  wilaya.touched"
+               class="alert alert-danger mt-2">
+            veuillez saisir une wilaya !
+          </div>
+        </div>
       </div>
 
 
@@ -80,20 +83,22 @@
         <label for="telephone">Numéro de téléphone</label>
         <input type="text" class="form-control" id="telephone" name="telephone"
                required
-               pattern="0[5-7][0-9]{8}" [(ngModel)]="entreprise.telephone" #telephone="ngModel">
+               pattern="0[5-7][0-9]{8}" [(ngModel)]="entreprise.telephone"
+               #telephone="ngModel">
         <div *ngIf="telephone.invalid &&  telephone.touched"
              class="alert alert-danger mt-2">
           saisissez un numéro de téléphone valide !
         </div>
       </div>
-    <div class="form-group">
-      <label for="domaine">Domaine</label>
-      <input type="text" class="form-control" id="domaine" name="domaine" required [(ngModel)]="entreprise.domaine" #domaine="ngModel">
-      <div *ngIf="domaine.invalid &&  domaine.touched"
-           class="alert alert-danger mt-2">
-        saisissez un domaine professionnel !
+      <div class="form-group">
+        <label for="domaine">Domaine</label>
+        <input type="text" class="form-control" id="domaine" name="domaine"
+               required [(ngModel)]="entreprise.domaine" #domaine="ngModel">
+        <div *ngIf="domaine.invalid &&  domaine.touched"
+             class="alert alert-danger mt-2">
+          saisissez un domaine professionnel !
+        </div>
       </div>
-    </div>
       <div class="form-group">
         <label for="description">Présentation de l'entreprise</label>
         <textarea class="form-control" id="description" name="description"
@@ -109,5 +114,6 @@
               [disabled]="!(entrepriseForm.form.valid && entreprise.password === confirmPassword)"
               class="btn btn-primary mx-auto">Créer le profile
       </button>
+    </div>
   </form>
 </div>
