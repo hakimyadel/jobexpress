@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Entreprise} from "../interfaces/entreprise";
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
-import {wilayas} from "../interfaces/constantes";
+import {wilayas,domaines} from "../interfaces/constantes";
 
 @Component({
   selector: 'app-edit-entreprise',
@@ -12,6 +12,7 @@ import {wilayas} from "../interfaces/constantes";
 export class EditEntrepriseComponent implements OnInit {
   entreprise: Entreprise ;
   wilayas = wilayas;
+  domaines = domaines ;
   confirmPassword: string;
   auth: boolean;
 

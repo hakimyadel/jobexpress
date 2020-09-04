@@ -92,15 +92,18 @@
           saisissez un numéro de téléphone valide !
         </div>
       </div>
-      <div class="form-group">
-        <label for="domaine">Domaine</label>
-        <input type="text" class="form-control" id="domaine" name="domaine"
-               required [(ngModel)]="entreprise.domaine" #domaine="ngModel">
-        <div *ngIf="domaine.invalid &&  domaine.touched"
-             class="alert alert-danger mt-2">
-          saisissez un domaine professionnel !
-        </div>
+    <div class="form-group ">
+      <label for="Domaine">Domaine</label>
+      <select class="form-control" name="domaine" id="Domaine" required
+              [(ngModel)]="entreprise.domaine" #domaine="ngModel">
+        <option *ngFor="let domaine of domaines"
+                [value]="domaine">{{domaine | titlecase}}</option>
+      </select>
+      <div *ngIf="domaine.invalid &&  domaine.touched"
+           class="alert alert-danger mt-2">
+        veuillez saisir le domaine !
       </div>
+    </div>
       <div class="form-group">
         <label for="description">Présentation de l'entreprise</label>
         <textarea class="form-control" id="description" name="description"
