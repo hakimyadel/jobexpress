@@ -23,8 +23,8 @@
         </div>
       </div>
     </div>
-
-    <div class="form-group ">
+    <div class="form-row">
+    <div class="form-group col">
       <label for="naissance">Date de naissance</label>
       <input type="date" class="form-control" id="naissance" name="naissance"
              required [(ngModel)]="candidat.naissance" #naissance="ngModel">
@@ -33,12 +33,30 @@
         Ce champs doit contenir votre date de naissance !
       </div>
     </div>
+    <div class="form-group col">
+      <label for="wilaya">Wilaya de résidence</label>
+      <select class="form-control" name="wilaya" id="wilaya" required
+              [(ngModel)]="candidat.wilaya" #wilaya="ngModel">
+        <option *ngFor="let wilaya of wilayas"
+                [value]="wilaya">{{wilaya | titlecase}}</option>
+      </select>
+      <div *ngIf="wilaya.invalid &&  wilaya.touched"
+           class="alert alert-danger mt-2">
+        veuillez saisir une wilaya !
+      </div>
+    </div>
+</div>
 
     <div class="form-group ">
       <label for="email">Email</label>
       <input type="email" class="form-control" id="email" name="email"
              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
-             placeholder="name@gmail.com" required [(ngModel)]="candidat.email">
+             placeholder="name@gmail.com" required [(ngModel)]="candidat.email" #email="ngModel">
+        <div *ngIf="email.invalid &&  email.touched"
+             class="alert alert-danger mt-2">
+          veuillez saisir un email écrit sous la forme : name@gmail.com !
+        </div>
+
     </div>
 
     <div class="form-row ">
@@ -47,55 +65,73 @@
         <input type="password" class="form-control" id="password"
                name="password"
                minlength="6" maxlength="20" required
-               [(ngModel)]="candidat.password">
+               [(ngModel)]="candidat.password" #password="ngModel">
+        <div *ngIf="password.invalid &&  password.touched"
+             class="alert alert-danger mt-2">
+         veuillez saisir un mot de passe  !
+        </div>
       </div>
       <div class="form-group col-md-6">
         <label for="passwordConfirm">Confirmé le mot de passe</label>
         <input type="password" class="form-control" id="passwordConfirm"
                minlength="6" maxlength="20" name="confirmPassword"
-               [(ngModel)]="confirmPassword" required>
+               [(ngModel)]="confirmPassword" required #confirmpassword="ngModel">
+        <div *ngIf="confirmpassword.invalid &&  confirmpassword.touched"
+             class="alert alert-danger mt-2">
+          veuillez confirmer le mot de passe  !
+        </div>
       </div>
     </div>
 
-    <div class="form-group">
-      <label for="wilaya">Wilaya de résidence</label>
-      <select class="form-control" name="wilaya" id="wilaya" required
-              [(ngModel)]="candidat.wilaya">
-        <option *ngFor="let wilaya of wilayas"
-                [value]="wilaya">{{wilaya | titlecase}}</option>
-      </select>
-    </div>
+
 
     <div class="form-group">
       <label for="inputTel">Numéro de téléphone</label>
-      <input type="text" class="form-control" id="inputTel" name="telphone"
+      <input type="text" class="form-control" id="inputTel" name="telephone"
              required
-             pattern="0[5-7][0-9]{8}" [(ngModel)]="candidat.telephone">
+             pattern="0[5-7][0-9]{8}" [(ngModel)]="candidat.telephone" #telephone="ngModel">
+      <div *ngIf="telephone.invalid &&  telephone.touched"
+           class="alert alert-danger mt-2">
+       saisissez un numéro de téléphone valide !
+      </div>
     </div>
-
-    <div class="form-group">
-      <label for="inputDiplome">Diplôme</label>
+    <div class="form-row">
+    <div class="form-group col">
+      <label for="inputDiplome">Diplôme universitaire</label>
       <input type="text" class="form-control" id="inputDiplome" name="diplome"
              required
-             minlength="4" [(ngModel)]="candidat.diplome">
+             minlength="4" [(ngModel)]="candidat.diplome" #diplome="ngModel">
+      <div *ngIf="diplome.invalid &&  diplome.touched"
+           class="alert alert-danger mt-2">
+        faites nous part de votre dimplome !
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="SelectNiveau">Niveau</label>
+    <div class="form-group col">
+      <label for="SelectNiveau">Niveau d'étude</label>
       <select class="form-control" name="niveau" id="selectNiveau"
-              required [(ngModel)]="candidat.niveau">
+              required [(ngModel)]="candidat.niveau"  #niveau="ngModel">
         <option *ngFor="let niveau of niveaux ; let i = index"
                 [value]="i">{{niveau}}</option>
       </select>
+      <div *ngIf="niveau.invalid &&  niveau.touched"
+           class="alert alert-danger mt-2">
+        choisissez votre niveau d'étude !
+      </div>
     </div>
 
-    <div class="form-group">
-      <label for="experience">Expérience</label>
+    <div class="form-group col">
+      <label for="experience">Expérience de travail</label>
       <select class="form-control" name="experience" id="experience"
-              required [(ngModel)]="candidat.experience">
+              required [(ngModel)]="candidat.experience" #experience="ngModel">
         <option *ngFor="let experience of experiences ; let i = index"
                 [value]="i">{{experience}}</option>
       </select>
+      <div *ngIf="experience.invalid && experience.touched"
+           class="alert alert-danger mt-2">
+        choisissez vos années d'expérience!
+      </div>
+    </div>
     </div>
 
     <div class="form-group">
@@ -104,17 +140,19 @@
                 rows="3" [(ngModel)]="candidat.description"></textarea>
     </div>
 
-    <div class="form-group">
-      <label for="controleFile">Ajouter une image a votre
-        profil</label>
-      <input type="file" class="form-control-file" id="controleFile"
+
+    <div class="form-group text-center ">
+      <input type="file" class="form-control-file " id="controleFile"
              accept="image/png, image/jpeg" (change)="uploadFile($event)">
       <img src="{{candidat.image}}" alt="photo du profile" width="200px">
+      <label for="controleFile">Ajouter une image a votre profil</label>
     </div>
+
+
 
     <button type="submit"
             [disabled]="!(candidatForm.form.valid && candidat.password === confirmPassword)"
-            class="btn btn-primary mr-auto">Créer le profile
+            class="btn btn-primary mx-auto">Créer le profile
     </button>
 
   </form>

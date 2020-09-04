@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ConnexionComponent} from "./connexion/connexion.component";
 import {AccueilComponent} from "./accueil/accueil.component";
-import {AuthCandidatService} from "./services/auth-candidat.service";
+import {AuthGuardService} from "./services/auth-guard.service";
 import {EditAnnonceComponent} from "./edit-annonce/edit-annonce.component";
 import {EditCandidatComponent} from "./edit-candidat/edit-candidat.component";
 import {EditEntrepriseComponent} from "./edit-entreprise/edit-entreprise.component";
