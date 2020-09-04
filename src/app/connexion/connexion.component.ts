@@ -12,39 +12,31 @@ export class ConnexionComponent implements OnInit {
   email: string;
   password: string;
 
-  constructor(private api: FirebaseAppService ,private router : Router) {
+  constructor(private api: FirebaseAppService, private router: Router) {
     this.email = '';
     this.password = '';
-
   }
 
   ngOnInit(): void {
   }
 
   seConnecter() {
-        let that = this;
-        this.api.app.auth().signOut();
-        this.api.app.auth().signInWithEmailAndPassword(this.email, this.password)
-          .then(function (result) {
-            console.log(result.user)
-            let user = result.user
-            //if(user.emailVerified){
-                that.router.navigate([user.displayName])
-            /*} else {
-              that.api.app.auth().signOut();
-              alert('Votre adresse Email n\'est pas encore vérifiée');
-            }*/
-          })
-          .catch(function (error) {
-            alert(error)
-          })
-
+    let that = this;
+    this.api.app.auth().signInWithEmailAndPassword(this.email, this.password)
+      .then(function (result) {
+        let user = result.user
+        that.api.app.auth().signOut();
+        if (user.emailVerified) {
+          localStorage.setItem('user', user.displayName);
+          localStorage.setItem('key', user.photoURL);
+          that.router.navigate([user.displayName])
+        } else {
+          alert('Votre adresse Email n\'est pas encore vérifiée');
+        }
+      })
+      .catch(function (error) {
+        alert(error)
+      })
   }
-
-  updatename() {
-    this.api.app.auth().currentUser.updateProfile( {displayName: 'candidat'});
-  }
-
-
 
 }

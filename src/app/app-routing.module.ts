@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import {ConnexionComponent} from "./connexion/connexion.component";
 import {AccueilComponent} from "./accueil/accueil.component";
-import {AuthGuardService} from "./services/auth-guard.service";
+import {AuthCandidatService} from "./services/auth-candidat.service";
 import {EditAnnonceComponent} from "./edit-annonce/edit-annonce.component";
 import {EditCandidatComponent} from "./edit-candidat/edit-candidat.component";
 import {EditEntrepriseComponent} from "./edit-entreprise/edit-entreprise.component";
@@ -20,7 +20,7 @@ const routes: Routes = [
   { path: 'recherche', component: RechercheComponent },
   //{ path: 'annonce', canActivate: [AuthGuardService], component: AnnonceComponent },
   { path: 'annonce', component: AnnonceComponent },
-  { path: 'candidat', canActivate: [AuthGuardService], component: CandidatComponent },
+  { path: 'candidat', canActivate: [AuthCandidatService], component: CandidatComponent },
   { path: 'entreprise', component: EntrepriseComponent },
   { path: 'adminisration', component: AccueilComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },

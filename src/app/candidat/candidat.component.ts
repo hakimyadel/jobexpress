@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Candidat} from "../interfaces/candidat";
 import {Router} from "@angular/router";
@@ -11,41 +11,39 @@ import {experiences, niveaux} from "../interfaces/constantes";
 })
 export class CandidatComponent implements OnInit {
 
-
   niveaux = niveaux
   experiences = experiences
-  candidat : Candidat = {
-  nom: '',
-  prenom: '',
-  naissance: null,
-  email: '',
-  password: '',
-  wilaya: null,
-  telephone: '',
-  diplome: '',
-  niveau: null,
-  experience: null,
-  description: '',
-  image: 'assets/images/photoProfile.jpg',
-  userId: null
-}
+  candidat: Candidat = {
+    nom: '',
+    prenom: '',
+    naissance: null,
+    email: '',
+    password: '',
+    wilaya: null,
+    telephone: '',
+    diplome: '',
+    niveau: null,
+    experience: null,
+    description: '',
+    image: 'assets/images/photoProfile.jpg',
+    userId: null
+  }
 
-  constructor(private api : FirebaseAppService, private router: Router) {
-    let that = this;
-    let cle = this.api.app.auth().currentUser.photoURL;
-    console.log(cle);
-    this.api.app.database().ref().child('candidat').child(cle).on('value', function (snapshot) {
-      console.log(snapshot.val());
+  constructor(private api: FirebaseAppService, private router: Router) {
+    const that = this;
+    this.api.app.database().ref().child('candidat').child(localStorage.getItem('key'))
+      .once('value',function (snapshot) {
       that.candidat = snapshot.val();
-    })
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 
-  ngOnInit(): void {
-
-  }
+  ngOnInit(): void {}
 
   seDeconnecter() {
-    this.api.app.auth().signOut();
+    localStorage.setItem('user', null);
+    localStorage.setItem('key', null);
     this.router.navigate(['connexion']);
   }
 }
