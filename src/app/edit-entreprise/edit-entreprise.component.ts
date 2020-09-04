@@ -10,24 +10,36 @@ import {wilayas} from "../interfaces/constantes";
   styleUrls: ['./edit-entreprise.component.css']
 })
 export class EditEntrepriseComponent implements OnInit {
-  wilayas = wilayas;
   entreprise: Entreprise ;
+  wilayas = wilayas;
   confirmPassword: string;
+  auth: boolean;
 
   constructor(private api: FirebaseAppService, private router: Router) {
-    this.entreprise ={
-      nom: '',
-      email: '',
-      password: '',
-      creation: null,
-      domaine: '',
-      wilaya: '',
-      telephone: '',
-      adresse: '',
-      description: '',
-      image: '',
-      annonces : [],
-      userId: null
+    const that = this;
+    this.auth = localStorage.getItem('user') === 'entreprise';
+    if (this.auth) {
+      this.api.app.database().ref().child('entreprise').child(localStorage.getItem('key'))
+        .once('value', function (snapshot) {
+          that.entreprise = snapshot.val();
+        }).catch(function (error) {
+        console.log(error);
+      });
+    } else {
+      this.entreprise = {
+        nom: '',
+        email: '',
+        password: '',
+        creation: null,
+        domaine: '',
+        wilaya: '',
+        telephone: '',
+        adresse: '',
+        description: '',
+        image: '',
+        annonces: [],
+        userId: null
+      }
     }
   }
 
@@ -69,6 +81,12 @@ export class EditEntrepriseComponent implements OnInit {
         that.entreprise.image = downloadURL
       });
     });
+  }
+
+  updateProfile() {
+    this.api.app.database().ref().child('/candidat')
+      .child(localStorage.getItem('key')).set(this.entreprise);
+    this.router.navigate(['entreprise'])
   }
 
 }

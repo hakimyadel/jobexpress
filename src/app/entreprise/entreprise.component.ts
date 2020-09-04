@@ -41,4 +41,8 @@ export class EntrepriseComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  editerProfile(){
+    this.router.navigate(['edit/entreprise']);
+  }
+
 }
