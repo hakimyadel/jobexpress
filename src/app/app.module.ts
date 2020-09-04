@@ -14,6 +14,7 @@ import { RechercheComponent } from './recherche/recherche.component';
 import { CandidatComponent } from './candidat/candidat.component';
 import { EntrepriseComponent } from './entreprise/entreprise.component';
 import {FormsModule} from "@angular/forms";
+import { AdminComponent } from './admin/admin.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import {FormsModule} from "@angular/forms";
     AnnonceComponent,
     RechercheComponent,
     CandidatComponent,
-    EntrepriseComponent
+    EntrepriseComponent,
+    AdminComponent
   ],
   imports: [
     BrowserModule,

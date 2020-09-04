@@ -1,6 +1,8 @@
-<nav class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
+<nav
+  class="navbar navbar-expand-lg navbar-light bg-light justify-content-between">
   <a class="navbar-brand" routerLink=""><h1>JOBEXPRESS</h1></a>
-  <button class="navbar-toggler" type="button" data-target="#navbarSupportedContent" data-toggle="collapse"
+  <button class="navbar-toggler" type="button"
+          data-target="#navbarSupportedContent" data-toggle="collapse"
           aria-controls="navbarSupportedContent" aria-expanded="false"
           aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
@@ -8,50 +10,57 @@
 
   <div class="collapse navbar-collapse row " id="navbarSupportedContent">
 
-      <ul class="navbar-nav ml-auto">
-        <li class="nav-item active ">
-          <a class="nav-link" routerLink="accueil">Acceuil</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" routerLink="recherche">recherche</a>
-        </li>
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item active ">
+        <a class="nav-link" routerLink="accueil">Acceuil</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" routerLink="recherche">recherche</a>
+      </li>
 
-        <li class="nav-item dropdown ">
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-             role="button" data-toggle="dropdown" aria-haspopup="true"
-             aria-expanded="false">
-            Créé un compte
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="edit/entreprise">autant qu'entreprise</a>
-            <a class="dropdown-item" routerLink="edit/candidat">autant que candidat</a>
+      <li class="nav-item dropdown ">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
+           role="button" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false">
+          Créé un compte
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+          <a class="dropdown-item" routerLink="edit/entreprise">autant
+            qu'entreprise</a>
+          <a class="dropdown-item" routerLink="edit/candidat">autant que
+            candidat</a>
 
 
-          </div>
-        </li>
-        <li class="nav-item dropdown">
+        </div>
+      </li>
+      <li *ngIf="api.user === 'candidat' || api.user === 'entreprise'"
+          class="nav-item dropdown">
 
-          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
-             role="button" data-toggle="dropdown" aria-haspopup="true"
-             aria-expanded="false">
-            Test
-          </a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" routerLink="annonce">annonce</a>
-            <a class="dropdown-item" routerLink="candidat">candidat</a>
-            <a class="dropdown-item" routerLink="entreprise">entreprise</a>
-            <a class="dropdown-item" routerLink="edit/annonce">edit annonce</a>
-            <a class="dropdown-item" routerLink="edit/candidat">edit candidat</a>
-            <a class="dropdown-item" routerLink="edit/entreprise">edit entreprise</a>
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" (click)="seDeconnecter()">Se déconnecter</a>
-          </div>
-        </li>
-        <li class="nav-item ">
-          <a class="nav-link" routerLink="connexion">Se connecter</a>
-        </li>
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown2"
+           role="button" data-toggle="dropdown" aria-haspopup="true"
+           aria-expanded="false">
+          Test
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown2">
+          <a class="dropdown-item" routerLink="annonce">annonce</a>
+          <a class="dropdown-item" routerLink="candidat">candidat</a>
+          <a class="dropdown-item" routerLink="entreprise">entreprise</a>
+          <a class="dropdown-item" routerLink="edit/annonce">edit annonce</a>
+          <div class="dropdown-divider"></div>
 
-      </ul>
+        </div>
+      </li>
+      <li class="nav-item " *ngIf="api.user != 'candidat' && api.user != 'entreprise'">
+        <a class="nav-link" routerLink="connexion" >Se
+          connecter</a>
+      </li>
+      <li class="nav-item " *ngIf="api.user === 'candidat' || api.user === 'entreprise'">
+        <a class="nav-link" (click)="seDeconnecter()"
+           >Se déconnecter</a>
+      </li>
 
-    </div>
+
+    </ul>
+
+  </div>
 </nav>

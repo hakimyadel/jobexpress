@@ -17,9 +17,12 @@ const firebaseConfig = {
 export class FirebaseAppService {
 
   app: firebase.app.App;
+  user: string
 
   constructor() {
     this.app = firebase.initializeApp(firebaseConfig);
+    this.user = localStorage.getItem('user')
+
   }
 
 }
