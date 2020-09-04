@@ -16,7 +16,7 @@ export class EditCandidatComponent implements OnInit {
   niveaux = niveaux;
   experiences = experiences
   confirmPassword: string;
-  auth: boolean
+  auth: boolean;
 
   constructor(private api: FirebaseAppService, private router: Router) {
     const that = this;

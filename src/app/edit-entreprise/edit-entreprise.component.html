@@ -9,7 +9,7 @@
         Ce champs doit contenir entre 2 et 20 caractères !
       </div>
       <div class="form-group ">
-        <label for="naissance">Date de naissance</label>
+        <label for="naissance">Date de création</label>
         <input type="date" class="form-control" id="naissance" name="naissance"
                required [(ngModel)]="entreprise.creation" #creation="ngModel">
         <div *ngIf="creation.invalid &&  creation.touched"
@@ -17,7 +17,7 @@
           Ce champs doit contenir votre date de naissance !
         </div>
       </div>
-      <div class="form-group ">
+      <div class="form-group " *ngIf="!auth">
         <label for="email">Email</label>
         <input type="email" class="form-control" id="email" name="email"
                pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
@@ -29,7 +29,7 @@
         </div>
 
       </div>
-      <div class="form-row ">
+      <div *ngIf="!auth" class="form-row ">
         <div class="form-group col-md-6">
           <label for="password">Mot de passe</label>
           <input type="password" class="form-control" id="password"
@@ -44,10 +44,10 @@
         <div class="form-group col-md-6">
           <label for="passwordConfirm">Confirmé le mot de passe</label>
           <input type="password" class="form-control" id="passwordConfirm"
-                 minlength="6" maxlength="20" name="confirmPassword"
-                 [(ngModel)]="confirmPassword" required
+                 name="confirmPassword"
+                 [(ngModel)]="confirmPassword"
                  #confirmpassword="ngModel">
-          <div *ngIf="confirmpassword.invalid &&  confirmpassword.touched"
+          <div *ngIf="entreprise.password != confirmPassword &&  confirmpassword.touched"
                class="alert alert-danger mt-2">
             veuillez confirmer le mot de passe !
           </div>
@@ -73,7 +73,7 @@
           </select>
           <div *ngIf="wilaya.invalid &&  wilaya.touched"
                class="alert alert-danger mt-2">
-            veuillez saisir une wilaya !
+            veuillez choisir une wilaya !
           </div>
         </div>
       </div>
@@ -110,10 +110,12 @@
         <img src="{{entreprise.image}}" alt="photo du profile" width="200px">
         <label for="controleFile">Ajouter une image a votre profil</label>
       </div>
-      <button type="submit"
+      <button type="submit" *ngIf="!auth"
               [disabled]="!(entrepriseForm.form.valid && entreprise.password === confirmPassword)"
               class="btn btn-primary mx-auto">Créer le profile
       </button>
+      <button *ngIf="auth" [disabled]="!(entrepriseForm.form.valid )"
+              class="btn btn-primary mx-auto" (click)="updateProfile()">Mettre à jour le profile</button>
     </div>
   </form>
 </div>

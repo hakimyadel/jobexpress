@@ -41,12 +41,6 @@ export class CandidatComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  seDeconnecter() {
-    localStorage.setItem('user', null);
-    localStorage.setItem('key', null);
-    this.router.navigate(['connexion']);
-  }
-
   editerProfile(){
     this.router.navigate(['edit/candidat']);
   }
