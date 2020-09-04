@@ -18,3 +18,14 @@ export const experiences = [
   'Quatre ans',
   'Cinq ans et plus'
 ]
+export const domaines =[
+  'informatique',
+  'biologie',
+  'médical',
+  'mécanique',
+  'agronomie',
+  'electronique',
+  'marketing',
+  'infographie',
+  'gestion',
+];

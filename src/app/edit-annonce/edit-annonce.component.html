@@ -1,5 +1,5 @@
 
-<form class="" action="" method="post">
+<form #annonceForm="ngForm" (ngSubmit)="creerAnnonce()">
   <div class="card mx-auto p-3 mt-5" style="width: 50rem;">
 
     <img src="bg.jpeg" class="card-img-top" alt="...">
@@ -7,88 +7,97 @@
 
 
       <div class="form-group">
-        <label for="exampleFormControlInput1">Nom de l'annonce</label>
-        <input type="email" class="form-control" id="exampleFormControlInput1"  required>
+        <label for="nom">Nom de l'annonce</label>
+        <input type="text" class="form-control" id="nom" name="nom" required
+               [(ngModel)]="annonce.nom" #nom="ngModel">
+        <div *ngIf="nom.invalid &&  nom.touched"
+             class="alert alert-danger mt-2">
+          veuillez saisir un nom pour l'annnonce !
+        </div>
       </div>
 
       <div class="form-group ">
-        <label for="selectWilaya">Wilaya</label>
-        <select class="form-control" name="wilaya" id="selectWilaya" required>
-          <option value="tous">tous</option>
-          <option value="Alger">Alger</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
-          <option value="adrar">adrar</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
-          <option value="sidi belabass">sidi belabass</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
-          <option value="sidi belabass">sidi belabass</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
-          <option value="sidi belabass">sidi belabass</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
-          <option value="sidi belabass">sidi belabass</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
-          <option value="sidi belabass">sidi belabass</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
-          <option value="sidi belabass">sidi belabass</option>
-          <option value="tlemcen">tlemcen</option>
-          <option value="oran">oran</option>
+        <label for="wilaya">Wilaya </label>
+        <select class="form-control" name="wilaya" id="wilaya" required
+                [(ngModel)]="annonce.wilaya" #wilaya="ngModel">
+          <option *ngFor="let wilaya of wilayas"
+                  [value]="wilaya">{{wilaya | titlecase}}</option>
         </select>
+        <div *ngIf="wilaya.invalid &&  wilaya.touched"
+             class="alert alert-danger mt-2">
+          veuillez saisir une wilaya !
+        </div>
       </div>
       <div class="form-group ">
         <label for="selectDomaine">Domaine</label>
-        <select class="form-control" name="domaine" id="selectDomaine" required>
-          <option value="informatique">informatique</option>
-          <option value="médical">médical</option>
-          <option value="gestion">gestion</option>
-          <option value="biologie">biologie</option>
-          <option value="electronique">electronique</option>
-          <option value="mecanique">mecanique</option>
-          <option value="chimie">chimie</option>
+        <select class="form-control" name="domaine" id="selectDomaine" required
+          [(ngModel)]="annonce.domaine" #domaine="ngModel">
+          <option *ngFor="let domaine of domaines"
+                  [value]="domaine">{{domaine | titlecase}}</option>
         </select>
+        <div *ngIf="domaine.invalid &&  domaine.touched"
+             class="alert alert-danger mt-2">
+          veuillez saisir le domaine !
+        </div>
       </div>
 
       <div class="form-group ">
         <label for="selectExperience">Experience</label>
-        <select class="form-control" name="experience" id="selectExperience" required>
-          <option value="pasdexp">pas d'experience requise</option>
-          <option value="1ans">1ans</option>
-          <option value="1ans">2ans</option>
-          <option value="1ans">3ans ou plus</option>
+        <select class="form-control" name="experience" id="selectExperience" required
+                [(ngModel)]="annonce.experience" #experience="ngModel">
+          <option *ngFor="let experience of experiences"
+                  [value]="experience">{{experience | titlecase}}</option>
         </select>
+        <div *ngIf="experience.invalid &&  experience.touched"
+             class="alert alert-danger mt-2">
+          veuillez saisir l'experience requise' !
+        </div>>
       </div>
 
       <div class="form-group ">
         <label for="selectNiveau">Niveau</label>
-        <select class="form-control" name="niveau" id="selectNiveau" required>
-          <option value="bac+3">bac+3(minimum)</option>
-          <option value="1ans">bac+5</option>
-
+        <select class="form-control" name="niveau" id="selectNiveau" required
+                [(ngModel)]="annonce.niveau" #niveau="ngModel">
+          <option *ngFor="let niveau of niveaux"
+                  [value]="niveau">{{niveau | titlecase}}</option>
         </select>
+        <div *ngIf="niveau.invalid &&  niveau.touched"
+             class="alert alert-danger mt-2">
+          veuillez saisir le niveau d'étude !
+        </div>
       </div>
 
       <div class="form-group">
-        <label for="exampleFormControlInput2">Numero de téléphone</label>
-        <input type="number" class="form-control" id="exampleFormControlInput2" required>
+        <label for="tel">Numero de téléphone</label>
+        <input type="number" class="form-control" id="tel" name="telephone" required pattern="0[5-7][0-9]{8}"
+               [(ngModel)]="annonce.telephone"
+               #telephone="ngModel">
+        <div *ngIf="telephone.invalid &&  telephone.touched"
+             class="alert alert-danger mt-2">
+          saisissez un numéro de téléphone valide !
+        </div>>
       </div>
 
 
       <div class="form-group">
-        <label for="exampleFormControlTextarea1">Description</label>
-        <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-      </div>
-      <div class="form-group">
-        <label for="exampleFormControlFile1">Ajouter une image a votre annonce</label>
-        <input type="file" class="form-control-file" id="exampleFormControlFile1">
+        <label for="description">Plus de détails sur l'annonce</label>
+        <textarea class="form-control" id="description"  name="description"
+                  rows="3" [(ngModel)]="annonce.description"></textarea>
       </div>
 
-      <button class="btn btn-primary" type="submit">Envoyé</button>
+      <div class="form-group text-center ">
+        <input type="file" class="form-control-file " id="controleFile"
+               accept="image/png, image/jpeg" (change)="uploadFile($event)">
+        <img src="{{annonce.image}}" alt="photo du profile" width="200px">
+        <label for="controleFile">Ajouter une image a votre profil</label>
+      </div>
+
+      <button type="submit"
+              [disabled]="!(annonceForm.form.valid )"
+              class="btn btn-primary mx-auto">Poster l'annonce
+      </button>
+
+
 
     </div>
   </div>

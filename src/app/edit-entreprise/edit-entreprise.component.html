@@ -8,8 +8,10 @@
            class="alert alert-danger mt-2">
         Ce champs doit contenir entre 2 et 20 caractères !
       </div>
+    </div>
+
       <div class="form-group ">
-        <label for="naissance">Date de naissance</label>
+        <label for="naissance">Date de création</label>
         <input type="date" class="form-control" id="naissance" name="naissance"
                required [(ngModel)]="entreprise.creation" #creation="ngModel">
         <div *ngIf="creation.invalid &&  creation.touched"
@@ -114,6 +116,6 @@
               [disabled]="!(entrepriseForm.form.valid && entreprise.password === confirmPassword)"
               class="btn btn-primary mx-auto">Créer le profile
       </button>
-    </div>
+
   </form>
 </div>

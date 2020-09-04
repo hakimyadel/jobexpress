@@ -14,7 +14,7 @@ export class EditCandidatComponent implements OnInit {
   candidat: Candidat;
   wilayas = wilayas;
   niveaux = niveaux;
-  experiences = experiences
+  experiences = experiences;
   confirmPassword: string;
   auth: boolean
 
