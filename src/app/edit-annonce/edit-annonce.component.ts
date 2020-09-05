@@ -60,7 +60,7 @@ export class EditAnnonceComponent implements OnInit {
     this.annonce.image = this.api.uploadFile(event);
   }
 
-  updateProfile() {
+  updateAnnonce() {
     this.api.app.database().ref().child('/annonce')
       .child(this.api.idAnnonce).set(this.annonce);
     this.router.navigate(['entreprise'])
