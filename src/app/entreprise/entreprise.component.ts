@@ -51,6 +51,8 @@ export class EntrepriseComponent implements OnInit {
   }
 
   AjouterAnnonce() {
+    this.api.idAnnonce = null;
+    localStorage.setItem('annonce' , null);
     this.router.navigate(['edit/annonce']);
   }
 
