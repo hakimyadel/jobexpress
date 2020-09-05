@@ -10,6 +10,7 @@ import {AnnonceComponent} from "./annonce/annonce.component";
 import {CandidatComponent} from "./candidat/candidat.component";
 import {EntrepriseComponent} from "./entreprise/entreprise.component";
 import {AuthCandidatService} from "./services/auth-candidat.service";
+import {AnnoncesEntrepriseComponent} from "./annonces-entreprise/annonces-entreprise.component";
 
 const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: 'annonce', component: AnnonceComponent },
   { path: 'candidat', canActivate: [AuthCandidatService], component: CandidatComponent },
   { path: 'entreprise', component: EntrepriseComponent },
+  { path: 'mesAnnonces', component: AnnoncesEntrepriseComponent },
   { path: 'adminisration', component: AccueilComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: '**', redirectTo: 'accueil' }

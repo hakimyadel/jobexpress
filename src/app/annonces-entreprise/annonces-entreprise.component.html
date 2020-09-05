@@ -1,0 +1,32 @@
+<table class="table" *ngIf="annonces.length > 0">
+  <thead>
+  <tr>
+    <th scope="col">Annonce</th>
+    <th scope="col">date de création</th>
+    <th scope="col">État</th>
+    <th scope="col">Nombre de candidats</th>
+    <th></th>
+    <th></th>
+    <th></th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr *ngFor="let annonce of annonces">
+    <th scope="row">{{annonce.nom}}</th>
+    <td>{{annonce.creation | date : 'dd/MM/yyyy' }}</td>
+    <td>{{annonce.confirm}}</td>
+    <td>
+      <div *ngIf="annonce.candidats">{{annonce.candidats.length}} candidats</div>
+      <div *ngIf="annonce.candidats == null">Aucun candidat</div>
+    </td>
+    <td> <button class="btn btn-primary" (click)="consulterAnnonce($event)">Consulter</button></td>
+    <td> <button class="btn btn-success" (click)="modifierAnnonce($event)">Modifier</button></td>
+    <td [hidden]="true">{{annonce.idAnnonce}}</td>
+  </tr>
+
+  </tbody>
+</table>
+
+<button type="button" class="btn btn-info"
+        (click)="AjouterAnnonce()">+ajouter une annonce</button>
+

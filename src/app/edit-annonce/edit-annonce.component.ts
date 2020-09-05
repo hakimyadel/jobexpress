@@ -60,7 +60,7 @@ export class EditAnnonceComponent implements OnInit {
         that.annonce.entreprise = snapshot.val();
       }).then(()=>{
       this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
-      this.router.navigate(['entreprise'])
+      this.router.navigate(['mesAnnonces'])
     }).catch(function (error) {
       console.log(error);
     });
@@ -89,7 +89,7 @@ export class EditAnnonceComponent implements OnInit {
       .child(this.api.idAnnonce).set(this.annonce);
     this.api.idAnnonce = null;
     localStorage.setItem('annonce' , null);
-    this.router.navigate(['entreprise'])
+    this.router.navigate(['mesAnnonces'])
   }
 
 }
