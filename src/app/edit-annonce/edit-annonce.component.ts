@@ -5,7 +5,6 @@ import {Router} from "@angular/router";
 import {wilayas, niveaux, experiences, domaines, diplomes} from "../interfaces/constantes";
 
 
-
 @Component({
   selector: 'app-edit-annonce',
   templateUrl: './edit-annonce.component.html',
@@ -32,7 +31,6 @@ export class EditAnnonceComponent implements OnInit {
   experiences = experiences;
 
 
-
   constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
     if (this.api.idAnnonce) {
@@ -49,33 +47,22 @@ export class EditAnnonceComponent implements OnInit {
   }
 
   creerAnnonce() {
-    let that = this;
-    this.api.app.auth().createUserWithEmailAndPassword(this.entreprise.email, this.entreprise.password)
-      .then(function (result) {
-        const newKey = that.api.app.database().ref().child('/entreprise').push().key;
-        result.user.updateProfile({displayName: 'entreprise', photoURL: newKey});
-        that.entreprise.userId = result.user.uid;
-        that.api.app.database().ref().child('/entreprise').child(newKey).set(that.entreprise);
-        result.user.sendEmailVerification().then(function () {
-          alert('Un lien de vérification a été envoyé à votre boite email. Veuillez le confirmer pour pouvoir accéder à votre compte ')
-          that.api.app.auth().signOut();
-          that.router.navigate(['connexion'])
-        }).catch(function (error) {
-        });
-      })
-      .catch(function (error) {
-        alert(error)
-      });
-
+    const newKey = this.api.app.database().ref().child('/annonce').push().key;
+    this.api.app.database().ref().child('/entreprise').child(this.api.idUser)
+      .child('annonces').push(newKey);
+    this.annonce.idEntreprise = this.api.idUser;
+    this.annonce.creation = new Date();
+    this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
+    this.router.navigate(['entreprise'])
   }
 
   uploadFile(event) {
-    this.entreprise.image = this.api.uploadFile(event);
+    this.annonce.image = this.api.uploadFile(event);
   }
 
   updateProfile() {
-    this.api.app.database().ref().child('/entreprise')
-      .child(this.api.idUser).set(this.entreprise);
+    this.api.app.database().ref().child('/annonce')
+      .child(this.api.idAnnonce).set(this.annonce);
     this.router.navigate(['entreprise'])
   }
 
