@@ -1,6 +1,6 @@
 export interface Annonce {
   nom: string
-  creation: Date
+  creation: string
   diplome: string
   telephone: string
   niveau: number

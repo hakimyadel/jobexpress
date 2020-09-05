@@ -51,7 +51,7 @@ export class EditAnnonceComponent implements OnInit {
     this.api.app.database().ref().child('/entreprise').child(this.api.idUser)
       .child('/annonces').push(newKey);
     this.annonce.idEntreprise = this.api.idUser;
-    this.annonce.creation = new Date();
+    this.annonce.creation = Date.now().toLocaleString();
     this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
     this.router.navigate(['entreprise'])
   }
