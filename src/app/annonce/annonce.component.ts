@@ -38,18 +38,9 @@ export class AnnonceComponent implements OnInit {
       this.api.app.database().ref().child('annonce').child(this.api.idAnnonce)
         .once('value', function (snapshot) {
           that.annonce = snapshot.val();
-          this.api.app.database().ref().child('entreprise').child(that.annonce.idEntreprise)
-            .once('value', function (snapshot) {
-              that.entreprise = snapshot.val();
-            }).catch(function (error) {
-            console.log(error);
-          });
         }).catch(function (error) {
         console.log(error);
       });
-
-
-
     }
   }
 

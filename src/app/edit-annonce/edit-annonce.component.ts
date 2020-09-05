@@ -79,6 +79,8 @@ export class EditAnnonceComponent implements OnInit {
   updateAnnonce() {
     this.api.app.database().ref().child('/annonce')
       .child(this.api.idAnnonce).set(this.annonce);
+    this.api.idAnnonce = null;
+    localStorage.setItem('annonce' , null);
     this.router.navigate(['entreprise'])
   }
 

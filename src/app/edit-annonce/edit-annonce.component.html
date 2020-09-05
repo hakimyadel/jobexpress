@@ -5,7 +5,8 @@
       <div class="form-group">
         <label for="nom">Nom de l'annonce</label>
         <input type="text" class="form-control" id="nom" name="nom" required
-               [(ngModel)]="annonce.nom" #nom="ngModel">
+               [(ngModel)]="annonce.nom" #nom="ngModel"
+               [disabled]="api.idAnnonce">
         <div *ngIf="nom.invalid &&  nom.touched"
              class="alert alert-danger mt-2">
           veuillez saisir un nom pour l'annnonce !
@@ -15,7 +16,8 @@
       <div class="form-group ">
         <label for="wilaya">Wilaya </label>
         <select class="form-control" name="wilaya" id="wilaya" required
-                [(ngModel)]="annonce.wilaya" #wilaya="ngModel">
+                [(ngModel)]="annonce.wilaya" #wilaya="ngModel"
+                [disabled]="api.idAnnonce">
           <option *ngFor="let wilaya of wilayas"
                   [value]="wilaya">{{wilaya | titlecase}}</option>
         </select>
@@ -27,7 +29,8 @@
       <div class="form-group ">
         <label for="selectDomaine">Diplôme</label>
         <select class="form-control" name="domaine" id="selectDomaine" required
-                [(ngModel)]="annonce.diplome" #domaine="ngModel">
+                [(ngModel)]="annonce.diplome" #domaine="ngModel"
+                [disabled]="api.idAnnonce">
           <option *ngFor="let diplome of diplomes"
                   [value]="diplome">{{diplome | titlecase}}</option>
         </select>
@@ -40,10 +43,10 @@
       <div class="form-group ">
         <label for="selectExperience">Experience</label>
         <select class="form-control" name="experience" id="selectExperience"
-                required
+                required [disabled]="api.idAnnonce"
                 [(ngModel)]="annonce.experience" #experience="ngModel">
-          <option *ngFor="let experience of experiences"
-                  [value]="experience">{{experience | titlecase}}</option>
+          <option *ngFor="let experience of experiences; let i = index"
+                  [value]="i">{{experience | titlecase}}</option>
         </select>
         <div *ngIf="experience.invalid &&  experience.touched"
              class="alert alert-danger mt-2">
@@ -54,9 +57,10 @@
       <div class="form-group ">
         <label for="selectNiveau">Niveau</label>
         <select class="form-control" name="niveau" id="selectNiveau" required
-                [(ngModel)]="annonce.niveau" #niveau="ngModel">
-          <option *ngFor="let niveau of niveaux"
-                  [value]="niveau">{{niveau | titlecase}}</option>
+                [(ngModel)]="annonce.niveau" #niveau="ngModel"
+                [disabled]="api.idAnnonce">
+          <option *ngFor="let niveau of niveaux; let i = index"
+                  [value]="i">{{niveau | titlecase}}</option>
         </select>
         <div *ngIf="niveau.invalid &&  niveau.touched"
              class="alert alert-danger mt-2">
@@ -69,7 +73,7 @@
         <input type="text" class="form-control" id="tel" name="telephone"
                required pattern="^0[5-7][0-9]{8}$"
                [(ngModel)]="annonce.telephone"
-               #telephone="ngModel">
+               #telephone="ngModel" [disabled]="api.idAnnonce">
         <div *ngIf="telephone.invalid &&  telephone.touched"
              class="alert alert-danger mt-2">
           saisissez un numéro de téléphone valide !
@@ -100,7 +104,6 @@
               class="btn btn-primary mx-auto" (click)="updateAnnonce()">Mettre à
         jour l'annonce
       </button>
-
 
     </div>
   </div>
