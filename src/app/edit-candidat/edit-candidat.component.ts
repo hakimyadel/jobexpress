@@ -11,39 +11,36 @@ import {wilayas, niveaux, experiences} from "../interfaces/constantes";
   styleUrls: ['./edit-candidat.component.css']
 })
 export class EditCandidatComponent implements OnInit {
-  candidat: Candidat;
+  candidat: Candidat = {
+    nom: '',
+    prenom: '',
+    naissance: null,
+    email: '',
+    password: '',
+    wilaya: null,
+    telephone: '',
+    diplome: '',
+    niveau: null,
+    experience: null,
+    description: '',
+    postule: [],
+    image: 'assets/images/photoProfile.jpg',
+    userId: null
+  };
   wilayas = wilayas;
   niveaux = niveaux;
   experiences = experiences;
   confirmPassword: string;
-  auth: boolean;
 
-  constructor(private api: FirebaseAppService, private router: Router) {
+  constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
-    this.auth = localStorage.getItem('user') === 'candidat';
-    if (this.auth) {
-      this.api.app.database().ref().child('candidat').child(localStorage.getItem('key'))
+    if (this.api.user === 'candidat') {
+      this.api.app.database().ref().child('candidat').child(this.api.idUser)
         .once('value', function (snapshot) {
           that.candidat = snapshot.val();
         }).catch(function (error) {
         console.log(error);
       });
-    } else {
-      this.candidat = {
-        nom: '',
-        prenom: '',
-        naissance: null,
-        email: '',
-        password: '',
-        wilaya: null,
-        telephone: '',
-        diplome: '',
-        niveau: null,
-        experience: null,
-        description: '',
-        image: 'assets/images/photoProfile.jpg',
-        userId: null
-      }
     }
   }
 
