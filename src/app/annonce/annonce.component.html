@@ -1,22 +1,32 @@
-<div class="card mx-auto mt-5 shadow p-3 mb-5 bg-white rounded " style="width: 50rem;">
+<div class="card mx-auto mt-5 shadow p-3 mb-5 bg-white rounded "
+     style="width: 50rem;">
   <div class="row">
 
     <div class="col ml-3 mr-3 mt-3 mb-3 ">
-      <h3 style="color:#154360">Nom de l'annonce <button type="button" class="btn btn-success mr-auto">Postuler</button></h3><br>
-      <p><span style="color:#196F3D"><b>poste :</b></span> développeur web back-end</p>
-      <p><span style="color:#196F3D" ><b>Experience :</b></span>  3 ans</p>
-      <p><span style="color:#196F3D"><b>diplome :</b></span>  informatique</p>
-      <p><span style="color:#196F3D"><b>Niveau :</b></span>  bac+5</p>
-      <p>Nous recherchons un developpeur web back-end qui maitrise les languages: php,javascript es5 et es6 . avec des connaissances en html et css</p>
+      <h3 style="color:#154360">{{annonce.nom}}
+        <button type="button" class="btn btn-success mr-auto">Postuler</button>
+      </h3>
+      <br>
+      <p><span style="color:#196F3D"><b>poste :</b></span> développeur web
+        back-end</p>
+      <p><span
+        style="color:#196F3D"><b>Experience :</b></span>{{experiences[annonce.experience]}}
+      </p>
+      <p><span style="color:#196F3D"><b>diplome :</b></span>{{annonce.diplome}}
+      </p>
+      <p><span
+        style="color:#196F3D"><b>Niveau :</b></span>{{niveaux[annonce.niveau]}}
+      </p>
+      <p>{{annonce.description}}</p>
     </div>
     <div class="col-md2 mr-3">
 
       <div class="" style="width: 20rem;">
         <img src="images/background1.jpg" class="card-img-top" alt="...">
         <div class=" text-center p-3 bg-light">
-          <p style="color:#196F3D"><b>Tlemcen</b></p>
-          <p style="color: #C0392B"><b>0675580804</b></p>
-          <p><b>Nom de l'entreprise</b></p>
+          <p style="color:#196F3D"><b>{{annonce.wilaya}}</b></p>
+          <p style="color: #C0392B"><b>{{annonce.telephone}}</b></p>
+          <p><b>{{entreprise.nom}}</b></p>
         </div>
 
       </div>
