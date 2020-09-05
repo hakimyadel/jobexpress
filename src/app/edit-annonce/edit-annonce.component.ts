@@ -2,8 +2,8 @@ import {Component, OnInit} from '@angular/core';
 import {Annonce} from "../interfaces/annonce";
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
-import {wilayas, niveaux, experiences,domaines} from "../interfaces/constantes";
-import {Candidat} from "../interfaces/candidat";
+import {wilayas, niveaux, experiences, domaines, diplomes} from "../interfaces/constantes";
+
 
 
 @Component({
@@ -12,53 +12,50 @@ import {Candidat} from "../interfaces/candidat";
   styleUrls: ['./edit-annonce.component.css']
 })
 export class EditAnnonceComponent implements OnInit {
-  annonce: Annonce;
+  annonce: Annonce = {
+    nom: '',
+    creation: null,
+    diplome: null,
+    niveau: null,
+    experience: null,
+    wilaya: '',
+    telephone: '',
+    description: '',
+    image: '',
+    confirm: 'attente',
+    idEntreprise: null,
+    candidats: []
+  };
   wilayas = wilayas;
   niveaux = niveaux;
+  diplomes = diplomes;
   experiences = experiences;
-  domaines = domaines;
-  auth: boolean;
 
-  constructor(private api: FirebaseAppService, private router: Router) {
+
+
+  constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
-    this.auth = localStorage.getItem('user') === 'candidat';
-    if (this.auth) {
-      this.api.app.database().ref().child('candidat').child(localStorage.getItem('key'))
+    if (this.api.idAnnonce) {
+      this.api.app.database().ref().child('annonce').child(this.api.idAnnonce)
         .once('value', function (snapshot) {
-          that.candidat = snapshot.val();
+          that.annonce = snapshot.val();
         }).catch(function (error) {
         console.log(error);
       });
-    } else {
-      this.candidat = {
-        nom: '',
-        prenom: '',
-        naissance: null,
-        email: '',
-        password: '',
-        wilaya: null,
-        telephone: '',
-        diplome: '',
-        niveau: null,
-        experience: null,
-        description: '',
-        image: 'assets/images/photoProfile.jpg',
-        userId: null
-      }
     }
   }
 
   ngOnInit(): void {
   }
 
-  creerCandidat() {
+  creerAnnonce() {
     let that = this;
-    this.api.app.auth().createUserWithEmailAndPassword(this.candidat.email, this.candidat.password)
+    this.api.app.auth().createUserWithEmailAndPassword(this.entreprise.email, this.entreprise.password)
       .then(function (result) {
-        const newKey = that.api.app.database().ref().child('/candidat').push().key;
-        result.user.updateProfile({displayName: 'candidat', photoURL: newKey});
-        that.candidat.userId = result.user.uid;
-        that.api.app.database().ref().child('/candidat').child(newKey).set(that.candidat);
+        const newKey = that.api.app.database().ref().child('/entreprise').push().key;
+        result.user.updateProfile({displayName: 'entreprise', photoURL: newKey});
+        that.entreprise.userId = result.user.uid;
+        that.api.app.database().ref().child('/entreprise').child(newKey).set(that.entreprise);
         result.user.sendEmailVerification().then(function () {
           alert('Un lien de vérification a été envoyé à votre boite email. Veuillez le confirmer pour pouvoir accéder à votre compte ')
           that.api.app.auth().signOut();
@@ -69,30 +66,17 @@ export class EditAnnonceComponent implements OnInit {
       .catch(function (error) {
         alert(error)
       });
+
   }
 
   uploadFile(event) {
-    const file = event.target.files[0];
-    let that = this;
-    const almostUniqueFileName = Date.now().toString();
-    const upload = this.api.app.storage().ref()
-      .child('images/' + almostUniqueFileName + file.name).put(file);
-    upload.on('state_changed', function (snapshot) {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
-    }, function (error) {
-      console.log(error)
-    }, function () {
-      upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        that.candidat.image = downloadURL
-      });
-    });
+    this.entreprise.image = this.api.uploadFile(event);
   }
 
   updateProfile() {
-    this.api.app.database().ref().child('/candidat')
-      .child(localStorage.getItem('key')).set(this.candidat);
-    this.router.navigate(['candidat'])
+    this.api.app.database().ref().child('/entreprise')
+      .child(this.api.idUser).set(this.entreprise);
+    this.router.navigate(['entreprise'])
   }
 
 }
