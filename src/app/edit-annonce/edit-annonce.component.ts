@@ -13,6 +13,7 @@ import {wilayas, niveaux, experiences, domaines, diplomes} from "../interfaces/c
 export class EditAnnonceComponent implements OnInit {
   annonce: Annonce = {
     nom: '',
+    poste: '',
     creation: null,
     diplome: null,
     niveau: null,
@@ -22,6 +23,7 @@ export class EditAnnonceComponent implements OnInit {
     description: '',
     image: '',
     confirm: 'attente',
+    entreprise: null,
     idEntreprise: null,
     idAnnonce: null,
     candidats: []
@@ -48,14 +50,20 @@ export class EditAnnonceComponent implements OnInit {
   }
 
   creerAnnonce() {
+    const that = this;
     const newKey = this.api.app.database().ref().child('/annonce').push().key;
-    /*this.api.app.database().ref().child('/entreprise').child(this.api.idUser)
-      .child('/annonces').push(newKey);*/
-    this.annonce.idEntreprise = this.api.idUser;
     this.annonce.idAnnonce = newKey;
+    this.annonce.idEntreprise = this.api.idUser;
     this.annonce.creation = Date.now();
-    this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
-    this.router.navigate(['entreprise'])
+    this.api.app.database().ref().child('entreprise').child(this.api.idUser).child('nom')
+      .once('value', function (snapshot) {
+        that.annonce.entreprise = snapshot.val();
+      }).then(()=>{
+      this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
+      this.router.navigate(['entreprise'])
+    }).catch(function (error) {
+      console.log(error);
+    });
   }
 
   uploadFile(event) {

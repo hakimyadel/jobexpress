@@ -14,6 +14,7 @@ export class AnnonceComponent implements OnInit {
 
   annonce: Annonce = {
     nom: '',
+    poste: '',
     creation: null,
     diplome: null,
     niveau: null,
@@ -23,6 +24,7 @@ export class AnnonceComponent implements OnInit {
     description: '',
     image: '',
     confirm: 'attente',
+    entreprise: null,
     idEntreprise: null,
     idAnnonce: null,
     candidats: []
