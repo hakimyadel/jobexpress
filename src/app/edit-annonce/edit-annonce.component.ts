@@ -47,13 +47,12 @@ export class EditAnnonceComponent implements OnInit {
   }
 
   creerAnnonce() {
-    const newKey = this.api.app.database().ref().child('annonce').push().key;
-    alert(newKey)
-    this.api.app.database().ref().child('entreprise').child(this.api.idUser)
-      .child('annonces').update(newKey)
+    const newKey = this.api.app.database().ref().child('/annonce').push().key;
+    this.api.app.database().ref().child('/entreprise').child(this.api.idUser)
+      .child('/annonces').push(newKey);
     this.annonce.idEntreprise = this.api.idUser;
     this.annonce.creation = new Date();
-    this.api.app.database().ref().child('annonce').child(newKey).set(this.annonce);
+    this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
     this.router.navigate(['entreprise'])
   }
 
