@@ -71,26 +71,12 @@ export class EditCandidatComponent implements OnInit {
   }
 
   uploadFile(event) {
-    const file = event.target.files[0];
-    let that = this;
-    const almostUniqueFileName = Date.now().toString();
-    const upload = this.api.app.storage().ref()
-      .child('images/' + almostUniqueFileName + file.name).put(file);
-    upload.on('state_changed', function (snapshot) {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
-    }, function (error) {
-      console.log(error)
-    }, function () {
-      upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        that.candidat.image = downloadURL
-      });
-    });
+    this.candidat.image = this.api.uploadFile(event);
   }
 
   updateProfile() {
     this.api.app.database().ref().child('/candidat')
-      .child(localStorage.getItem('key')).set(this.candidat);
+      .child(this.api.idUser).set(this.candidat);
     this.router.navigate(['candidat'])
   }
 }
