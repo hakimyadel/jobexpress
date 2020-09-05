@@ -23,6 +23,7 @@ export class EditAnnonceComponent implements OnInit {
     image: '',
     confirm: 'attente',
     idEntreprise: null,
+    idAnnonce: null,
     candidats: []
   };
   wilayas = wilayas;
@@ -48,10 +49,11 @@ export class EditAnnonceComponent implements OnInit {
 
   creerAnnonce() {
     const newKey = this.api.app.database().ref().child('/annonce').push().key;
-    this.api.app.database().ref().child('/entreprise').child(this.api.idUser)
-      .child('/annonces').push(newKey);
+    /*this.api.app.database().ref().child('/entreprise').child(this.api.idUser)
+      .child('/annonces').push(newKey);*/
     this.annonce.idEntreprise = this.api.idUser;
-    this.annonce.creation = Date.now().toLocaleString();
+    this.annonce.idAnnonce = newKey;
+    this.annonce.creation = Date.now();
     this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
     this.router.navigate(['entreprise'])
   }

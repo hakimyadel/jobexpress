@@ -1,6 +1,6 @@
 export interface Annonce {
   nom: string
-  creation: string
+  creation: number
   diplome: string
   telephone: string
   niveau: number
@@ -9,6 +9,7 @@ export interface Annonce {
   image: string
   confirm: string
   description: string
+  idAnnonce: string
   idEntreprise: string
   candidats: string[]
 }

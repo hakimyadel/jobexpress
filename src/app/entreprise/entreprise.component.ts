@@ -53,4 +53,18 @@ export class EntrepriseComponent implements OnInit {
   AjouterAnnonce() {
     this.router.navigate(['edit/annonce']);
   }
+
+  modifierAnnonce(event) {
+    const annonce = event.target.parentNode.parentNode.lastChild.textContent;
+    this.api.idAnnonce = annonce;
+    localStorage.setItem('annonce' , annonce);
+    this.router.navigate(['edit/annonce']);
+  }
+
+  consulterAnnonce(event) {
+    const annonce = event.target.parentNode.parentNode.lastChild.textContent;
+    this.api.idAnnonce = annonce;
+    localStorage.setItem('annonce' , annonce);
+    this.router.navigate(['annonce']);
+  }
 }

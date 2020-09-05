@@ -25,8 +25,8 @@ export class FirebaseAppService {
   constructor() {
     this.app = firebase.initializeApp(firebaseConfig);
     this.user = localStorage.getItem('user');
-    this.idUser = localStorage.getItem('idUser');
-    this.idAnnonce = localStorage.getItem('idAnnonce');
+    this.idUser = localStorage.getItem('key');
+    this.idAnnonce = localStorage.getItem('annonce');
   }
 
 }
