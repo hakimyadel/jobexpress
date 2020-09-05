@@ -11,6 +11,7 @@ import {CandidatComponent} from "./candidat/candidat.component";
 import {EntrepriseComponent} from "./entreprise/entreprise.component";
 import {AuthCandidatService} from "./services/auth-candidat.service";
 import {AnnoncesEntrepriseComponent} from "./annonces-entreprise/annonces-entreprise.component";
+import {AdminComponent} from "./admin/admin.component";
 
 const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
@@ -24,7 +25,7 @@ const routes: Routes = [
   { path: 'candidat', canActivate: [AuthCandidatService], component: CandidatComponent },
   { path: 'entreprise', component: EntrepriseComponent },
   { path: 'mesAnnonces', component: AnnoncesEntrepriseComponent },
-  { path: 'adminisration', component: AccueilComponent },
+  { path: 'admin', component: AdminComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: '**', redirectTo: 'accueil' }
 ];
