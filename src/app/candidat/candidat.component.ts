@@ -25,6 +25,7 @@ export class CandidatComponent implements OnInit {
     niveau: null,
     experience: null,
     description: '',
+    postule: [],
     image: 'assets/images/photoProfile.jpg',
     userId: null
   }

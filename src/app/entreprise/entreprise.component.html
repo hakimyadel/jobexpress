@@ -10,11 +10,13 @@
     <p><b>Adresse</b> : {{entreprise.adresse}}</p>
     <p><b>Numero de téléphone</b> : {{entreprise.telephone}}</p>
     <br><br>
-    <button type="button" class="btn btn-outline-dark">Modifier mon profil
+    <button type="button" class="btn btn-outline-dark"
+            (click)="editerProfile()">Modifier mon profil
     </button>&nbsp;
     <button type="button" class="btn btn-outline-danger">Supprimer mon profil
     </button>
     <br><br>
-    <button type="button" class="btn btn-info">+ajouter une annonce</button>
+    <button type="button" class="btn btn-info"
+    (click)="AjouterAnnonce()">+ajouter une annonce</button>
   </div>
 </div>

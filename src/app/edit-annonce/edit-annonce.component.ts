@@ -47,17 +47,32 @@ export class EditAnnonceComponent implements OnInit {
   }
 
   creerAnnonce() {
-    const newKey = this.api.app.database().ref().child('/annonce').push().key;
-    this.api.app.database().ref().child('/entreprise').child(this.api.idUser)
-      .child('annonces').push(newKey);
+    const newKey = this.api.app.database().ref().child('annonce').push().key;
+    alert(newKey)
+    this.api.app.database().ref().child('entreprise').child(this.api.idUser)
+      .child('annonces').update(newKey)
     this.annonce.idEntreprise = this.api.idUser;
     this.annonce.creation = new Date();
-    this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
+    this.api.app.database().ref().child('annonce').child(newKey).set(this.annonce);
     this.router.navigate(['entreprise'])
   }
 
   uploadFile(event) {
-    this.annonce.image = this.api.uploadFile(event);
+    const that = this
+    const file = event.target.files[0];
+    const almostUniqueFileName = Date.now().toString();
+    const upload = this.api.app.storage().ref()
+      .child('images/' + almostUniqueFileName + file.name).put(file);
+    upload.on('state_changed', function (snapshot) {
+      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+      console.log('Upload is ' + progress + '% done');
+    }, function (error) {
+      console.log(error)
+    }, function () {
+      upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+        that.annonce.image = downloadURL
+      });
+    });
   }
 
   updateAnnonce() {

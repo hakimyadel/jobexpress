@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
 import {experiences, niveaux} from "../interfaces/constantes";
@@ -24,14 +24,14 @@ export class EntrepriseComponent implements OnInit {
     adresse: '',
     description: '',
     image: '',
-    annonces : [],
+    annonces: [],
     userId: null
   }
 
   constructor(private api: FirebaseAppService, private router: Router) {
     const that = this;
     this.api.app.database().ref().child('entreprise').child(localStorage.getItem('key'))
-      .once('value',function (snapshot) {
+      .once('value', function (snapshot) {
         that.entreprise = snapshot.val();
       }).catch(function (error) {
       console.log(error);
@@ -41,8 +41,11 @@ export class EntrepriseComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  editerProfile(){
+  editerProfile() {
     this.router.navigate(['edit/entreprise']);
   }
 
+  AjouterAnnonce() {
+    this.router.navigate(['edit/annonce']);
+  }
 }

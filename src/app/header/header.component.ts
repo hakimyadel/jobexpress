@@ -19,6 +19,7 @@ export class HeaderComponent implements OnInit {
     localStorage.setItem('user', null);
     localStorage.setItem('key', null);
     this.api.user = null;
+    this.api.idUser = null;
     this.router.navigate(['connexion']);
   }
 

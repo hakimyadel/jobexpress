@@ -30,6 +30,7 @@ export class ConnexionComponent implements OnInit {
           localStorage.setItem('user', user.displayName);
           localStorage.setItem('key', user.photoURL);
           that.api.user = user.displayName;
+          that.api.idUser = user.photoURL;
           that.router.navigate([user.displayName])
         /*} else {
           alert('Votre adresse Email n\'est pas encore vérifiée');
