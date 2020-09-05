@@ -1,4 +1,8 @@
-export const wilayas = ['tlemcen', 'alger', 'oran'];
+export const wilayas = [
+  'tlemcen',
+  'alger',
+  'oran' // à completer
+];
 
 export const niveaux = [
   'Sans objet',
@@ -28,4 +32,10 @@ export const domaines =[
   'marketing',
   'infographie',
   'gestion',
+];
+
+export const diplomes =[
+  'licence',
+  'master',
+  'docorat'
 ];

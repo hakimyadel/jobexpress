@@ -2,7 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {Entreprise} from "../interfaces/entreprise";
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
-import {wilayas,domaines} from "../interfaces/constantes";
+import {wilayas, domaines} from "../interfaces/constantes";
 
 @Component({
   selector: 'app-edit-entreprise',
@@ -10,42 +10,39 @@ import {wilayas,domaines} from "../interfaces/constantes";
   styleUrls: ['./edit-entreprise.component.css']
 })
 export class EditEntrepriseComponent implements OnInit {
-  entreprise: Entreprise ;
+  entreprise: Entreprise = {
+    nom: '',
+    email: '',
+    password: '',
+    creation: null,
+    domaine: '',
+    wilaya: '',
+    telephone: '',
+    adresse: '',
+    description: '',
+    image: '',
+    annonces: [],
+    userId: null
+  };
   wilayas = wilayas;
-  domaines = domaines ;
+  domaines = domaines;
   confirmPassword: string;
-  auth: boolean;
 
-  constructor(private api: FirebaseAppService, private router: Router) {
+  constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
-    this.auth = localStorage.getItem('user') === 'entreprise';
-    if (this.auth) {
-      this.api.app.database().ref().child('entreprise').child(localStorage.getItem('key'))
+    if (this.api.user === 'entreprise') {
+      this.api.app.database().ref().child('entreprise').child(this.api.idUser)
         .once('value', function (snapshot) {
           that.entreprise = snapshot.val();
         }).catch(function (error) {
         console.log(error);
       });
-    } else {
-      this.entreprise = {
-        nom: '',
-        email: '',
-        password: '',
-        creation: null,
-        domaine: '',
-        wilaya: '',
-        telephone: '',
-        adresse: '',
-        description: '',
-        image: '',
-        annonces: [],
-        userId: null
-      }
     }
   }
 
   ngOnInit(): void {
   }
+
   creerEntreprise() {
     let that = this;
     this.api.app.auth().createUserWithEmailAndPassword(this.entreprise.email, this.entreprise.password)
@@ -66,27 +63,14 @@ export class EditEntrepriseComponent implements OnInit {
       });
 
   }
+
   uploadFile(event) {
-    const file = event.target.files[0];
-    let that = this;
-    const almostUniqueFileName = Date.now().toString();
-    const upload = this.api.app.storage().ref()
-      .child('images/' + almostUniqueFileName + file.name).put(file);
-    upload.on('state_changed', function (snapshot) {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
-    }, function (error) {
-      console.log(error)
-    }, function () {
-      upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        that.entreprise.image = downloadURL
-      });
-    });
+    this.entreprise.image = this.api.uploadFile(event);
   }
 
   updateProfile() {
-    this.api.app.database().ref().child('/candidat')
-      .child(localStorage.getItem('key')).set(this.entreprise);
+    this.api.app.database().ref().child('/entreprise')
+      .child(this.api.idUser).set(this.entreprise);
     this.router.navigate(['entreprise'])
   }
 

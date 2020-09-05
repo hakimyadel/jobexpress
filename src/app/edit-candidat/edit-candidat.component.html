@@ -48,7 +48,7 @@
       </div>
     </div>
 
-    <div *ngIf="!auth" class="form-group ">
+    <div *ngIf="api.user != 'candidat'" class="form-group ">
       <label for="email">Email</label>
       <input type="email" class="form-control" id="email" name="email"
              pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,4}"
@@ -60,7 +60,7 @@
       </div>
     </div>
 
-    <div *ngIf="!auth"class="form-row ">
+    <div *ngIf="api.user != 'candidat'"class="form-row ">
       <div class="form-group col-md-6">
         <label for="password">Mot de passe</label>
         <input type="password" class="form-control" id="password"
@@ -152,11 +152,11 @@
     </div>
 
 
-    <button type="submit" *ngIf="!auth"
+    <button type="submit" *ngIf="api.user != 'candidat'"
             [disabled]="!(candidatForm.form.valid && candidat.password === confirmPassword)"
             class="btn btn-primary mx-auto">Créer le profile
     </button>
-    <button *ngIf="auth" [disabled]="!(candidatForm.form.valid )"
+    <button *ngIf="api.user === 'candidat'" [disabled]="!(candidatForm.form.valid )"
             class="btn btn-primary mx-auto" (click)="updateProfile()">Mettre à jour le profile</button>
 
   </form>

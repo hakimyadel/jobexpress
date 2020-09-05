@@ -11,5 +11,6 @@ export interface Candidat {
   telephone: string
   description: string
   image: string
+  postule: string[]
   userId: string
 }

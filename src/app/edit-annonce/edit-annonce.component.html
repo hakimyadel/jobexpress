@@ -1,4 +1,3 @@
-
 <form #annonceForm="ngForm" (ngSubmit)="creerAnnonce()">
   <div class="card mx-auto p-3 mt-5" style="width: 50rem;">
 
@@ -29,21 +28,22 @@
         </div>
       </div>
       <div class="form-group ">
-        <label for="selectDomaine">Domaine</label>
+        <label for="selectDomaine">Diplôme</label>
         <select class="form-control" name="domaine" id="selectDomaine" required
-          [(ngModel)]="annonce.domaine" #domaine="ngModel">
-          <option *ngFor="let domaine of domaines"
-                  [value]="domaine">{{domaine | titlecase}}</option>
+                [(ngModel)]="annonce.diplome" #domaine="ngModel">
+          <option *ngFor="let diplome of diplomes"
+                  [value]="diplome">{{diplome | titlecase}}</option>
         </select>
         <div *ngIf="domaine.invalid &&  domaine.touched"
              class="alert alert-danger mt-2">
-          veuillez saisir le domaine !
+          veuillez saisir le diplôme recherché !
         </div>
       </div>
 
       <div class="form-group ">
         <label for="selectExperience">Experience</label>
-        <select class="form-control" name="experience" id="selectExperience" required
+        <select class="form-control" name="experience" id="selectExperience"
+                required
                 [(ngModel)]="annonce.experience" #experience="ngModel">
           <option *ngFor="let experience of experiences"
                   [value]="experience">{{experience | titlecase}}</option>
@@ -51,7 +51,8 @@
         <div *ngIf="experience.invalid &&  experience.touched"
              class="alert alert-danger mt-2">
           veuillez saisir l'experience requise' !
-        </div>>
+        </div>
+        >
       </div>
 
       <div class="form-group ">
@@ -69,19 +70,21 @@
 
       <div class="form-group">
         <label for="tel">Numero de téléphone</label>
-        <input type="number" class="form-control" id="tel" name="telephone" required pattern="0[5-7][0-9]{8}"
+        <input type="number" class="form-control" id="tel" name="telephone"
+               required pattern="0[5-7][0-9]{8}"
                [(ngModel)]="annonce.telephone"
                #telephone="ngModel">
         <div *ngIf="telephone.invalid &&  telephone.touched"
              class="alert alert-danger mt-2">
           saisissez un numéro de téléphone valide !
-        </div>>
+        </div>
+        >
       </div>
 
 
       <div class="form-group">
         <label for="description">Plus de détails sur l'annonce</label>
-        <textarea class="form-control" id="description"  name="description"
+        <textarea class="form-control" id="description" name="description"
                   rows="3" [(ngModel)]="annonce.description"></textarea>
       </div>
 
@@ -89,14 +92,19 @@
         <input type="file" class="form-control-file " id="controleFile"
                accept="image/png, image/jpeg" (change)="uploadFile($event)">
         <img src="{{annonce.image}}" alt="photo du profile" width="200px">
-        <label for="controleFile">Ajouter une image a votre profil</label>
+        <label for="controleFile">Ajouter une image a votre annonce</label>
       </div>
 
-      <button type="submit"
+      <button type="submit" *ngIf="api.idAnnonce == null"
               [disabled]="!(annonceForm.form.valid )"
               class="btn btn-primary mx-auto">Poster l'annonce
       </button>
 
+      <button *ngIf="api.idAnnonce"
+              [disabled]="!(annonceForm.form.valid )"
+              class="btn btn-primary mx-auto" (click)="updateAnnonce()">Mettre à
+        jour l'annonce
+      </button>
 
 
     </div>
