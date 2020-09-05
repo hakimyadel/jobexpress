@@ -3,6 +3,7 @@ import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
 import {experiences, niveaux} from "../interfaces/constantes";
 import {Entreprise} from "../interfaces/entreprise";
+import {Annonce} from "../interfaces/annonce";
 
 @Component({
   selector: 'app-entreprise',
@@ -28,14 +29,18 @@ export class EntrepriseComponent implements OnInit {
     userId: null
   }
 
+  annonces : Annonce[] = [];
+
   constructor(private api: FirebaseAppService, private router: Router) {
     const that = this;
-    this.api.app.database().ref().child('entreprise').child(localStorage.getItem('key'))
-      .once('value', function (snapshot) {
+    this.api.app.database().ref().child('entreprise').child(this.api.idUser)
+      .on('value', function (snapshot) {
         that.entreprise = snapshot.val();
-      }).catch(function (error) {
-      console.log(error);
-    });
+        that.api.app.database().ref('/annonce').orderByChild("idEntreprise")
+          .equalTo(that.api.idUser).on("child_added", function(data) {
+          that.annonces.push(data.val());
+        });
+      });
   }
 
   ngOnInit(): void {
