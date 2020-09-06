@@ -5,19 +5,22 @@
       <th scope="col">nom de l'annonce </th>
       <th scope="col">titre du poste </th>
       <th scope="col">L'entreprise</th>
-      <th scope="col"></th>
-      <th scope="col"></th>
-      <th scope="col"></th>
+      <th ></th>
+      <th ></th>
+      <th ></th>
+      <th></th>
     </tr>
     </thead>
     <tbody>
     <tr *ngFor="let annonce of annonces">
+      <td [hidden]="true">{{annonce.idAnnonce}}</td>
       <th scope="row">{{annonce.nom}}</th>
       <td>{{annonce.poste}}</td>
-      <th><a >{{annonce.entreprise}}</a></th>
-      <td><button type="button" class="btn btn-primary">Détails</button></td>
-      <td><button type="button" class="btn btn-success">Accepter</button></td>
-      <td><button type="button" class="btn btn-danger">Refusée</button></td>
+      <th><a (click)="detailEntreprise($event)">{{annonce.entreprise}}</a></th>
+      <td><button type="button" class="btn btn-primary" (click)="detailAnnonce($event)">Détails</button></td>
+      <td><button type="button" class="btn btn-success" (click)="accepter($event)">Accepter</button></td>
+      <td><button type="button" class="btn btn-danger" (click)="refuser($event)">Refusée</button></td>
+      <td [hidden]="true">{{annonce.idEntreprise}}</td>
     </tr>
 
     </tbody>

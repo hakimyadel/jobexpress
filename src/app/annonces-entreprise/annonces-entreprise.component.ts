@@ -1,5 +1,4 @@
 import {Component, OnInit} from '@angular/core';
-import {experiences, niveaux} from "../interfaces/constantes";
 import {Annonce} from "../interfaces/annonce";
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
@@ -14,13 +13,11 @@ export class AnnoncesEntrepriseComponent implements OnInit {
   annonces: Annonce[] = [];
 
   constructor(private api: FirebaseAppService, private router: Router) {
-    this.api.app.database().ref('/annonce').orderByChild("idEntreprise")
-      .equalTo(this.api.idUser).on("child_added",  (data) => {
-      this.annonces.push(data.val());
-    });
+
   }
 
   ngOnInit(): void {
+    this.refresh();
   }
 
   AjouterAnnonce() {
@@ -44,11 +41,18 @@ export class AnnoncesEntrepriseComponent implements OnInit {
   }
 
   supprimerAnnonce(event) {
-    const ligne = event.target.parentElement.parentElement
-    const cleAnnonce = ligne.lastChild.textContent;
+    const cleAnnonce = event.target.parentElement.parentElement.lastChild.textContent;
     if (confirm("Voulez vous vraiment supprimer cette annonce ?")) {
       this.api.app.database().ref().child('annonce').child(cleAnnonce).remove();
-      ligne.parentElement.parentElement.deleteRow(ligne.rowIndex);
+      this.refresh();
     }
+  }
+
+  refresh(){
+    this.annonces =[];
+    this.api.app.database().ref('/annonce').orderByChild("idEntreprise")
+      .equalTo(this.api.idUser).on("child_added",  (data) => {
+      this.annonces.push(data.val());
+    });
   }
 }
