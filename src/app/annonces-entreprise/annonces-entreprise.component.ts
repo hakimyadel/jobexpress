@@ -11,17 +11,13 @@ import {Router} from "@angular/router";
 })
 export class AnnoncesEntrepriseComponent implements OnInit {
 
-  annonces: Annonce[] = [];
+  annonces: any[] = [];
 
   constructor(private api: FirebaseAppService, private router: Router) {
-    const that = this;
-    this.api.app.database().ref().child('entreprise').child(this.api.idUser)
-      .on('value', function (snapshot) {
-        that.api.app.database().ref('/annonce').orderByChild("idEntreprise")
-          .equalTo(that.api.idUser).on("child_added", function (data) {
-          that.annonces.push(data.val());
-        });
-      });
+    this.api.app.database().ref('/annonce').orderByChild("idEntreprise")
+      .equalTo(this.api.idUser).on("child_added",  (data) => {
+      this.annonces.push(data.val());
+    });
   }
 
   ngOnInit(): void {
