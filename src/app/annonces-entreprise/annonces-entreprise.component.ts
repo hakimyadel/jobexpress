@@ -11,7 +11,7 @@ import {Router} from "@angular/router";
 })
 export class AnnoncesEntrepriseComponent implements OnInit {
 
-  annonces: any[] = [];
+  annonces: Annonce[] = [];
 
   constructor(private api: FirebaseAppService, private router: Router) {
     this.api.app.database().ref('/annonce').orderByChild("idEntreprise")

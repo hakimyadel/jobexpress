@@ -1,4 +1,4 @@
-<div class="card mx-auto" style="width: 80rem">
+<div class="card mx-auto container" >
   <table class="table table-hover">
     <thead>
     <tr>
@@ -11,10 +11,10 @@
     </tr>
     </thead>
     <tbody>
-    <tr>
-      <th scope="row">nom annonce</th>
-      <td>titre poste</td>
-      <th><a href="">nom entreprise</a></th>
+    <tr *ngFor="let annonce of annonces">
+      <th scope="row">{{annonce.nom}}</th>
+      <td>{{annonce.poste}}</td>
+      <th><a >{{annonce.entreprise}}</a></th>
       <td><button type="button" class="btn btn-primary">Détails</button></td>
       <td><button type="button" class="btn btn-success">Accepter</button></td>
       <td><button type="button" class="btn btn-danger">Refusée</button></td>
