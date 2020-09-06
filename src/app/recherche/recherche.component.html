@@ -1,79 +1,75 @@
-<div class="card mx-auto p-3 mt-5" style="width: 20rem;"  >
-  <form >
+<div class="card mx-auto p-3 mt-5" style="width: 20rem;">
+  <form>
     <div class="form-group">
-
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+      <input class="form-control mr-sm-2" type="text" placeholder="Search"
+             aria-label="Search" [(ngModel)]="texteRech" name="serch">
     </div>
     <div class="form-group">
-      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+      <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+              (click)="recherche()">
+        Chercher
+      </button>
     </div>
-
 
     <div class="form-group ">
-      <label for="selectWilaya">Domaine</label>
-      <select class="form-control" name="wilaya" id="selectWilaya">
-        <option value="tous">tous</option>
-        <option value="Alger">Alger</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
-        <option value="adrar">adrar</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
-        <option value="sidi belabass">sidi belabass</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
-        <option value="sidi belabass">sidi belabass</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
-        <option value="sidi belabass">sidi belabass</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
-        <option value="sidi belabass">sidi belabass</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
-        <option value="sidi belabass">sidi belabass</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
-        <option value="sidi belabass">sidi belabass</option>
-        <option value="tlemcen">tlemcen</option>
-        <option value="oran">oran</option>
+      <label for="selectWilaya">Wilaya</label>
+      <select class="form-control" name="wilaya" id="selectWilaya"
+              [(ngModel)]="wilayaRech">
+        <option value="tous">Tous</option>
+        <option *ngFor="let wilaya of wilayas"
+                value="{{wilaya}}">{{wilaya}}</option>
       </select>
     </div>
 
     <div class="form-group ">
       <label for="selectDomaine">Domaine</label>
-      <select class="form-control" name="domaine" id="selectDomaine">
-        <option value="informatique">informatique</option>
-        <option value="médical">médical</option>
-        <option value="gestion">gestion</option>
-        <option value="biologie">biologie</option>
-        <option value="electronique">electronique</option>
-        <option value="mecanique">mecanique</option>
-        <option value="chimie">chimie</option>
-
+      <select class="form-control" name="domaine" id="selectDomaine"
+              [(ngModel)]="domaineRech">
+        <option value="tous">Tous</option>
+        <option *ngFor="let domaine of domaines"
+                value="{{domaine}}">{{domaine}}</option>
       </select>
     </div>
 
     <div class="form-group ">
-      <label for="selectExperience">Eexperience</label>
-      <select class="form-control" name="experience" id="selectExperience">
-        <option value="pasdexp">pas d'experience requise</option>
-        <option value="1ans">1ans</option>
-        <option value="1ans">2ans</option>
-        <option value="1ans">3ans ou plus</option>
+      <label for="selectExperience">Experience</label>
+      <select class="form-control" name="experience" id="selectExperience"
+              [(ngModel)]="experienceRech">
+        <option value="tous">Tous</option>
+        <option *ngFor="let experience of experiences; let i = index"
+                value="{{i}}">{{experience}}</option>
       </select>
     </div>
 
     <div class="form-group  ">
       <label for="selectNiveau">Niveau</label>
-      <select class="form-control" name="niveau" id="selectNiveau">
-        <option value="bac+3">bac+3(minimum)</option>
-        <option value="1ans">bac+5</option>
-
+      <select class="form-control" name="niveau" id="selectNiveau"
+              [(ngModel)]="niveauRech">
+        <option value="tous">Tous</option>
+        <option *ngFor="let niveau of niveaux; let i = index"
+                value="{{i}}">{{niveau}}</option>
       </select>
     </div>
-
-
-
   </form>
+
+  <div *ngFor="let annonce of annonces" class="container-fluid">
+    <div class="card">
+      <img src="{{annonce.image}}" class="card-img-top"
+           alt="{{annonce.nom}}">
+      <div class="card-body">
+        <h5 class="card-title">{{annonce.nom}}</h5>
+        <p class="card-text">{{annonce.poste}}</p>
+        <a class="card-text" (click)="detailEntreprise($event)">
+          <div [hidden]="true">{{annonce.idEntreprise}}</div>
+          {{annonce.entreprise}}<small
+          class="text-muted">{{annonce.creation| date: 'dd/MM/yyyy'}}</small>
+        </a>
+        <button (click)="detailAnnonce($event)">
+          <div [hidden]="true">{{annonce.idAnnonce}}</div>
+          Voir détails
+        </button>
+      </div>
+    </div>
+  </div>
+
 </div>

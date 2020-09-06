@@ -17,9 +17,13 @@ export class HeaderComponent implements OnInit {
 
   seDeconnecter() {
     localStorage.setItem('user', null);
-    localStorage.setItem('key', null);
+    localStorage.setItem('entreprise', null);
+    localStorage.setItem('candidat', null);
+    localStorage.setItem('annonce', null);
     this.api.user = null;
-    this.api.idUser = null;
+    this.api.idEnt = null;
+    this.api.idCand = null;
+    this.api.idAnnonce = null;
     this.router.navigate(['connexion']);
   }
 

@@ -15,7 +15,7 @@ export const niveaux = [
   'bac + 7 (Doctorat)' ];
 
 export const experiences = [
-  'Sans objet',
+  'Aucune expérience',
   'Un an',
   'Deux ans',
   'Trois ans',

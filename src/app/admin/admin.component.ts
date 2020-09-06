@@ -28,8 +28,8 @@ export class AdminComponent implements OnInit {
 
   detailEntreprise(event) {
     const cleEntreprise = event.target.parentElement.parentElement.lastChild.textContent;
-    this.api.idUser = cleEntreprise;
-    localStorage.setItem('key' , cleEntreprise);
+    this.api.idEnt = cleEntreprise;
+    localStorage.setItem('entreprise' , cleEntreprise);
     this.router.navigate(['entreprise']);
 
   }

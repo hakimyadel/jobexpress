@@ -11,6 +11,7 @@ export interface Annonce {
   confirm: string
   description: string
   entreprise: string
+  domaine: string
   idAnnonce: string
   idEntreprise: string
   candidats: string[]

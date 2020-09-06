@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
 import {Entreprise} from "../interfaces/entreprise";
-import {Annonce} from "../interfaces/annonce";
 
 @Component({
   selector: 'app-entreprise',
@@ -29,7 +28,7 @@ export class EntrepriseComponent implements OnInit {
 
   constructor(private api: FirebaseAppService, private router: Router) {
     const that = this;
-    this.api.app.database().ref().child('entreprise').child(this.api.idUser)
+    this.api.app.database().ref().child('entreprise').child(this.api.idEnt)
       .on('value', function (snapshot) {
         that.entreprise = snapshot.val();
       });

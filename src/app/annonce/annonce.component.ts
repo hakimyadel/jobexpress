@@ -25,6 +25,7 @@ export class AnnonceComponent implements OnInit {
     image: '',
     confirm: 'attente',
     entreprise: null,
+    domaine: null,
     idEntreprise: null,
     idAnnonce: null,
     candidats: []

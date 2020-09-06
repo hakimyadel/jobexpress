@@ -32,7 +32,7 @@ export class CandidatComponent implements OnInit {
 
   constructor(private api: FirebaseAppService, private router: Router) {
     const that = this;
-    this.api.app.database().ref().child('candidat').child(localStorage.getItem('key'))
+    this.api.app.database().ref().child('candidat').child(this.api.idCand)
       .once('value',function (snapshot) {
       that.candidat = snapshot.val();
     }).catch(function (error) {

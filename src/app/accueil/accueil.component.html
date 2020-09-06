@@ -51,28 +51,18 @@
       <h3 >Les 3 dernières offres :</h3>
       <div class="bg-light">
         <div class="card-deck mt-5 ">
-          <div class="card">
-            <img src="../../assets/images/condidat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="../../assets/images/condidat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This card has supporting text below as a natural lead-in to additional content.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
-            </div>
-          </div>
-          <div class="card">
-            <img src="../../assets/images/condidat.jpg" class="card-img-top" alt="...">
-            <div class="card-body">
-              <h5 class="card-title">Card title</h5>
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This card has even longer content than the first to show that equal height action.</p>
-              <p class="card-text"><small class="text-muted">Last updated 3 mins ago</small></p>
+          <div *ngFor="let annonce of annonces" class="container-fluid">
+            <div class="card">
+              <img src="{{annonce.image}}" class="card-img-top"
+                   alt="{{annonce.nom}}">
+              <div class="card-body">
+                <h5 class="card-title">{{annonce.nom}}</h5>
+                <p class="card-text">{{annonce.poste}}</p>
+                <p class="card-text" >
+                  {{annonce.entreprise}}<small
+                  class="text-muted">{{annonce.creation| date: 'dd/MM/yyyy'}}</small>
+                </p>
+              </div>
             </div>
           </div>
         </div>

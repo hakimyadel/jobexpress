@@ -31,7 +31,7 @@ export class EditEntrepriseComponent implements OnInit {
   constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
     if (this.api.user === 'entreprise') {
-      this.api.app.database().ref().child('entreprise').child(this.api.idUser)
+      this.api.app.database().ref().child('entreprise').child(this.api.idEnt)
         .once('value', function (snapshot) {
           that.entreprise = snapshot.val();
         }).catch(function (error) {
@@ -84,7 +84,7 @@ export class EditEntrepriseComponent implements OnInit {
 
   updateProfile() {
     this.api.app.database().ref().child('/entreprise')
-      .child(this.api.idUser).set(this.entreprise);
+      .child(this.api.idEnt).set(this.entreprise);
     this.router.navigate(['entreprise'])
   }
 

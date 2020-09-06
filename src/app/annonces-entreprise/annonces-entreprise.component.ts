@@ -51,7 +51,7 @@ export class AnnoncesEntrepriseComponent implements OnInit {
   refresh(){
     this.annonces =[];
     this.api.app.database().ref('/annonce').orderByChild("idEntreprise")
-      .equalTo(this.api.idUser).on("child_added",  (data) => {
+      .equalTo(this.api.idEnt).on("child_added",  (data) => {
       this.annonces.push(data.val());
     });
   }

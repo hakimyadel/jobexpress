@@ -24,6 +24,7 @@ export class EditAnnonceComponent implements OnInit {
     image: '',
     confirm: 'attente',
     entreprise: null,
+    domaine: null,
     idEntreprise: null,
     idAnnonce: null,
     candidats: []
@@ -53,11 +54,12 @@ export class EditAnnonceComponent implements OnInit {
     const that = this;
     const newKey = this.api.app.database().ref().child('/annonce').push().key;
     this.annonce.idAnnonce = newKey;
-    this.annonce.idEntreprise = this.api.idUser;
+    this.annonce.idEntreprise = this.api.idEnt;
     this.annonce.creation = Date.now();
-    this.api.app.database().ref().child('entreprise').child(this.api.idUser).child('nom')
+    this.api.app.database().ref().child('entreprise').child(this.api.idEnt)
       .once('value', function (snapshot) {
-        that.annonce.entreprise = snapshot.val();
+        that.annonce.entreprise = snapshot.val().nom;
+        that.annonce.domaine = snapshot.val().domaine;
       }).then(()=>{
       this.api.app.database().ref().child('/annonce').child(newKey).set(this.annonce);
       this.router.navigate(['mesAnnonces'])

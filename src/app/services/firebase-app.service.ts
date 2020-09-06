@@ -18,14 +18,16 @@ export class FirebaseAppService {
 
   app: firebase.app.App;
   user: string;
-  idUser:string;
+  idEnt: string;
+  idCand: string
   idAnnonce: string;
 
 
   constructor() {
     this.app = firebase.initializeApp(firebaseConfig);
     this.user = localStorage.getItem('user');
-    this.idUser = localStorage.getItem('key');
+    this.idEnt = localStorage.getItem('entreprise');
+    this.idCand = localStorage.getItem('candidat');
     this.idAnnonce = localStorage.getItem('annonce');
   }
 
