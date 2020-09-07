@@ -85,6 +85,13 @@ export class EditEntrepriseComponent implements OnInit {
   updateProfile() {
     this.api.app.database().ref().child('/entreprise')
       .child(this.api.idEnt).set(this.entreprise);
+    this.api.app.database().ref('/annonce').orderByChild("idEntreprise")
+      .equalTo(this.api.idEnt).on("child_added",  (data) => {
+      this.api.app.database().ref().child('/annonce')
+        .child(data.key).child('entreprise').set(this.entreprise.nom);
+      this.api.app.database().ref().child('/annonce')
+        .child(data.key).child('domaine').set(this.entreprise.domaine);
+    });
     this.router.navigate(['entreprise'])
   }
 
