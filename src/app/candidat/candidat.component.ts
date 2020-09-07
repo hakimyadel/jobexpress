@@ -45,4 +45,9 @@ export class CandidatComponent implements OnInit {
   editerProfile(){
     this.router.navigate(['edit/candidat']);
   }
+
+  modifierPasword() {
+    this.router.navigate(['edit/password']);
+  }
+
 }

@@ -44,4 +44,8 @@ export class EntrepriseComponent implements OnInit {
   voirAnnonces() {
     this.router.navigate(['mesAnnonces']);
   }
+
+  modifierPasword() {
+    this.router.navigate(['edit/password']);
+  }
 }

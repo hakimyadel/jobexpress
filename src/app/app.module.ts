@@ -16,6 +16,8 @@ import { EntrepriseComponent } from './entreprise/entreprise.component';
 import {FormsModule} from "@angular/forms";
 import { AdminComponent } from './admin/admin.component';
 import { AnnoncesEntrepriseComponent } from './annonces-entreprise/annonces-entreprise.component';
+import { ModifierPasswordComponent } from './modifier-password/modifier-password.component';
+import { ReinitialiserPasswordComponent } from './reinitialiser-password/reinitialiser-password.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { AnnoncesEntrepriseComponent } from './annonces-entreprise/annonces-entr
     CandidatComponent,
     EntrepriseComponent,
     AdminComponent,
-    AnnoncesEntrepriseComponent
+    AnnoncesEntrepriseComponent,
+    ModifierPasswordComponent,
+    ReinitialiserPasswordComponent
   ],
   imports: [
     BrowserModule,
