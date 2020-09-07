@@ -12,7 +12,7 @@ import {Router} from "@angular/router";
 export class RechercheComponent implements OnInit {
 
   data: Annonce[] = [];
-  annonces : Annonce[];
+  annonces : Annonce[] = [];
   wilayas = wilayas;
   niveaux = niveaux;
   experiences = experiences;
@@ -23,11 +23,15 @@ export class RechercheComponent implements OnInit {
   experienceRech = 'tous';
   domaineRech = 'tous';
   texteRech = '';
+  postule = false;
 
   constructor(private api: FirebaseAppService, private router: Router) {
     this.api.app.database().ref('/annonce').orderByChild("confirm")
       .equalTo('accepte').on("child_added", (data) => {
       this.data.push(data.val());
+      if(data.val().candidats == null|| !data.val().candidats.includes(this.api.idCand)){
+        this.annonces.push(data.val());
+      }
     })
   }
 
@@ -35,7 +39,11 @@ export class RechercheComponent implements OnInit {
   }
 
   recherche(){
+    this.postule = false;
     this.annonces = this.data.filter(a =>
+      a.candidats == null || !a.candidats.includes(this.api.idCand)
+    );
+    this.annonces = this.annonces.filter(a =>
       a.nom.includes(this.texteRech)
       || a .poste.includes(this.texteRech)
       || a.diplome.includes(this.texteRech)
@@ -58,6 +66,13 @@ export class RechercheComponent implements OnInit {
       this.annonces = this.annonces.filter(a =>
         a.experience >= parseInt(this.experienceRech))
     }
+  }
+
+  chargerPostuleCandidat(){
+    this.postule = true;
+    this.annonces = this.data.filter(a =>
+      a.candidats != null && a.candidats.includes(this.api.idCand)
+    );
   }
 
   detailEntreprise(event) {

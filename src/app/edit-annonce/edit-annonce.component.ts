@@ -69,19 +69,18 @@ export class EditAnnonceComponent implements OnInit {
   }
 
   uploadFile(event) {
-    const that = this
     const file = event.target.files[0];
     const almostUniqueFileName = Date.now().toString();
     const upload = this.api.app.storage().ref()
       .child('images/' + almostUniqueFileName + file.name).put(file);
-    upload.on('state_changed', function (snapshot) {
+    upload.on('state_changed',  (snapshot) => {
       var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
       console.log('Upload is ' + progress + '% done');
-    }, function (error) {
+    }, (error) => {
       console.log(error)
-    }, function () {
+    },  () => {
       upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        that.annonce.image = downloadURL
+        this.annonce.image = downloadURL
       });
     });
   }

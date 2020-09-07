@@ -48,4 +48,28 @@ export class EntrepriseComponent implements OnInit {
   modifierPasword() {
     this.router.navigate(['edit/password']);
   }
+
+  supprimerProfile() {
+    if (confirm("Voulez vous vraiment supprimer votre profile ?")) {
+      this.api.app.database().ref('/annonce').orderByChild("idEntreprise")
+        .equalTo(this.api.idEnt).on("child_added",  (data) => {
+        this.api.app.database().ref().child('annonce').child(data.val().idAnnonce).remove();
+      });
+      this.api.app.auth().signInWithEmailAndPassword(this.entreprise.email, this.entreprise.password).then( result => {
+        this.api.app.database().ref().child('entreprise').child(this.api.idEnt).remove();
+        result.user.delete().then(()=>{
+          alert('Votre profil a bien été supprimé');
+          localStorage.setItem('user', null);
+          localStorage.setItem('entreprise', null);
+          localStorage.setItem('candidat', null);
+          localStorage.setItem('annonce', null);
+          this.api.user = null;
+          this.api.idEnt = null;
+          this.api.idCand = null;
+          this.api.idAnnonce = null;
+          this.router.navigate(['accueil']);
+        }).catch(error => alert(error))
+      }).catch(error => alert(error))
+    }
+  }
 }

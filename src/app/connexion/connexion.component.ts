@@ -21,22 +21,23 @@ export class ConnexionComponent implements OnInit {
   }
 
   seConnecter() {
-    let that = this;
     this.api.app.auth().signInWithEmailAndPassword(this.email, this.password)
-      .then(function (result) {
+      .then(result => {
         let user = result.user
-        that.api.app.auth().signOut();
+        this.api.app.auth().signOut();
+        this.api.app.database().ref().child(user.displayName).child(user.photoURL)
+          .child('password').set(this.password);
         //if (user.emailVerified) {*/
           localStorage.setItem('user', user.displayName);
-          that.api.user = user.displayName;
+          this.api.user = user.displayName;
           if(user.displayName == 'candidat'){
             localStorage.setItem('candidat', user.photoURL);
-            that.api.idCand = user.photoURL;
+            this.api.idCand = user.photoURL;
           } else if (user.displayName == 'entreprise'){
             localStorage.setItem('entreprise', user.photoURL);
-            that.api.idEnt = user.photoURL;
+            this.api.idEnt = user.photoURL;
           }
-          that.router.navigate([user.displayName])
+          this.router.navigate([user.displayName])
         /*} else {
           alert('Votre adresse Email n\'est pas encore vérifiée');
         }*/

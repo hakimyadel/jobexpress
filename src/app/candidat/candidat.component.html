@@ -1,5 +1,6 @@
 <div class="card mx-auto text-center mt-5" style="width: 50rem;">
-  <img class="rounded-circle mx-auto mt-3" src="{{candidat.image}}" alt="" height="200">
+  <img class="rounded-circle mx-auto mt-3" src="{{candidat.image}}" alt=""
+       height="200">
   <div class="card-body">
     <h5 class="card-title">{{candidat.nom}} {{candidat.prenom}}</h5><br>
     <p class="card-text">{{candidat.description}}</p><br>
@@ -12,11 +13,14 @@
     <p><b>Numero de téléphone</b> : {{candidat.telephone}}</p>
     <br><br>
     <button type="button" class="btn btn-outline-dark"
-            (click)="editerProfile()">Modifier mon profil</button>&nbsp;
+            (click)="editerProfile()">Modifier mon profil
+    </button>&nbsp;
     <button type="button" class="btn btn-outline-dark"
             (click)="modifierPasword()">Modifier mon mot de passe
     </button>
-    <button type="button" class="btn btn-outline-danger">Supprimer mon profil</button>
+    <button type="button" class="btn btn-outline-danger"
+            (click)="supprimerProfile()">Supprimer mon profil
+    </button>
   </div>
 </div>
 

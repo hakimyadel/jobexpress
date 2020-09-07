@@ -1,104 +1,163 @@
 <div class="row">
-<div class="container-fluid col-4 mt-5">
-  <div class="card shadow p-3 mb-5 bg-white rounded  p-3 mx-auto" style="width: 20rem;">
-    <form>
-      <div class="form-group">
-        <input class="form-control mr-sm-2" type="text" placeholder="Search"
-               aria-label="Search" [(ngModel)]="texteRech" name="serch">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
-                (click)="recherche()">
-          Chercher
-        </button>
-      </div>
+  <div class="container-fluid col-4 mt-5">
+    <div class="card shadow p-3 mb-5 bg-white rounded  p-3 mx-auto"
+         style="width: 20rem;">
+      <form>
+        <div class="form-group">
+          <input class="form-control mr-sm-2" type="text" placeholder="Search"
+                 aria-label="Search" [(ngModel)]="texteRech" name="serch">
+        </div>
+        <div class="form-group">
+          <button class="btn btn-outline-success my-2 my-sm-0" type="submit"
+                  (click)="recherche()">
+            Chercher
+          </button>
+        </div>
 
-      <div class="form-group ">
-        <label for="selectWilaya">Wilaya</label>
-        <select class="form-control" name="wilaya" id="selectWilaya"
-                [(ngModel)]="wilayaRech">
-          <option value="tous">Tous</option>
-          <option *ngFor="let wilaya of wilayas"
-                  value="{{wilaya}}">{{wilaya}}</option>
-        </select>
-      </div>
+        <div class="form-group ">
+          <label for="selectWilaya">Wilaya</label>
+          <select class="form-control" name="wilaya" id="selectWilaya"
+                  [(ngModel)]="wilayaRech">
+            <option value="tous">Tous</option>
+            <option *ngFor="let wilaya of wilayas"
+                    value="{{wilaya}}">{{wilaya}}</option>
+          </select>
+        </div>
 
-      <div class="form-group ">
-        <label for="selectDomaine">Domaine</label>
-        <select class="form-control" name="domaine" id="selectDomaine"
-                [(ngModel)]="domaineRech">
-          <option value="tous">Tous</option>
-          <option *ngFor="let domaine of domaines"
-                  value="{{domaine}}">{{domaine}}</option>
-        </select>
-      </div>
+        <div class="form-group ">
+          <label for="selectDomaine">Domaine</label>
+          <select class="form-control" name="domaine" id="selectDomaine"
+                  [(ngModel)]="domaineRech">
+            <option value="tous">Tous</option>
+            <option *ngFor="let domaine of domaines"
+                    value="{{domaine}}">{{domaine}}</option>
+          </select>
+        </div>
 
-      <div class="form-group ">
-        <label for="selectExperience">Experience</label>
-        <select class="form-control" name="experience" id="selectExperience"
-                [(ngModel)]="experienceRech">
-          <option value="tous">Tous</option>
-          <option *ngFor="let experience of experiences; let i = index"
-                  value="{{i}}">{{experience}}</option>
-        </select>
-      </div>
+        <div class="form-group ">
+          <label for="selectExperience">Experience</label>
+          <select class="form-control" name="experience" id="selectExperience"
+                  [(ngModel)]="experienceRech">
+            <option value="tous">Tous</option>
+            <option *ngFor="let experience of experiences; let i = index"
+                    value="{{i}}">{{experience}}</option>
+          </select>
+        </div>
 
-      <div class="form-group  ">
-        <label for="selectNiveau">Niveau</label>
-        <select class="form-control" name="niveau" id="selectNiveau"
-                [(ngModel)]="niveauRech">
-          <option value="tous">Tous</option>
-          <option *ngFor="let niveau of niveaux; let i = index"
-                  value="{{i}}">{{niveau}}</option>
-        </select>
-      </div>
-    </form>
+        <div class="form-group  ">
+          <label for="selectNiveau">Niveau</label>
+          <select class="form-control" name="niveau" id="selectNiveau"
+                  [(ngModel)]="niveauRech">
+            <option value="tous">Tous</option>
+            <option *ngFor="let niveau of niveaux; let i = index"
+                    value="{{i}}">{{niveau}}</option>
+          </select>
+        </div>
+      </form>
+
+      <button (click)="chargerPostuleCandidat()">Voir mes postulats</button>
+    </div>
   </div>
 
-</div>
-<div class="col-8  mt-5" >
-  <div *ngFor="let annonce of annonces" class="card mt-3 shadow p-3  bg-white rounded "
-       style="width: 50rem;">
-    <div class="row">
+  <div *ngIf="!postule" class="col-8  mt-5">
+    <h2>Annonces disponibles</h2>
+    <div *ngFor="let annonce of annonces"
+         class="card mt-3 shadow p-3  bg-white rounded "
+         style="width: 50rem;">
+      <div class="row">
 
-      <div class="col ml-3 mr-3 mt-3 mb-3 ">
-        <h3 style="color:#154360">{{annonce.nom}}
-          <button type="button" class="btn btn-success mr-auto" (click)="postuler($event)">
-            <div hidden>{{annonce.idAnnonce}}</div>
-            Postuler</button>
-        </h3>
-        <br>
-        <p><span style="color:#196F3D"><b>poste :</b></span> {{annonce.poste}}</p>
-        <p><span
-          style="color:#196F3D"><b>Experience :</b></span>{{experiences[annonce.experience]}}
-        </p>
-        <p><span style="color:#196F3D"><b>diplome :</b></span>{{annonce.diplome}}
-        </p>
-        <p><span
-          style="color:#196F3D"><b>Niveau :</b></span>{{niveaux[annonce.niveau]}}
-        </p>
-        <p>{{annonce.description}}</p>
-        <button type="button" class="btn btn-warning" (click)="detailEntreprise($event)">
-          <div hidden>{{annonce.idEntreprise}}</div>
-          Voir le profil de l'annonceur</button>
-      </div>
-      <div class="col-md2 mr-3">
+        <div class="col ml-3 mr-3 mt-3 mb-3 ">
+          <h3 style="color:#154360">{{annonce.nom}}
+            <button type="button" class="btn btn-success mr-auto"
+                    (click)="postuler($event)">
+              <div hidden>{{annonce.idAnnonce}}</div>
+              Postuler
+            </button>
+          </h3>
+          <br>
+          <p><span style="color:#196F3D"><b>poste :</b></span> {{annonce.poste}}
+          </p>
+          <p><span
+            style="color:#196F3D"><b>Experience :</b></span>{{experiences[annonce.experience]}}
+          </p>
+          <p><span
+            style="color:#196F3D"><b>diplome :</b></span>{{annonce.diplome}}
+          </p>
+          <p><span
+            style="color:#196F3D"><b>Niveau :</b></span>{{niveaux[annonce.niveau]}}
+          </p>
+          <p>{{annonce.description}}</p>
+          <button type="button" class="btn btn-warning"
+                  (click)="detailEntreprise($event)">
+            <div hidden>{{annonce.idEntreprise}}</div>
+            Voir le profil de l'annonceur
+          </button>
+        </div>
+        <div class="col-md2 mr-3">
 
-        <div class="card" style="width: 20rem;">
-          <img src="{{annonce.image}}" class="mx-auto img-thumbnail" height="100px" >
-          <div class=" card-body text-center p-3 bg-light">
-            <p style="color:#196F3D"><b>{{annonce.wilaya}}</b></p>
-            <p style="color: #C0392B"><b>{{annonce.telephone}}</b></p>
-            <p><b>{{annonce.entreprise}}</b></p>
+          <div class="card" style="width: 20rem;">
+            <img src="{{annonce.image}}" class="mx-auto img-thumbnail"
+                 height="100px">
+            <div class=" card-body text-center p-3 bg-light">
+              <p style="color:#196F3D"><b>{{annonce.wilaya}}</b></p>
+              <p style="color: #C0392B"><b>{{annonce.telephone}}</b></p>
+              <p><b>{{annonce.entreprise}}</b></p>
+
+            </div>
 
           </div>
-
         </div>
       </div>
     </div>
   </div>
 
-</div>
+  <div  *ngIf="postule" class="col-8  mt-5">
+    <h2>Mes postulats</h2>
+    <div *ngFor="let annonce of annonces"
+         class="card mt-3 shadow p-3  bg-white rounded "
+         style="width: 50rem;">
+      <div class="row">
+
+        <div class="col ml-3 mr-3 mt-3 mb-3 ">
+          <h3 style="color:#154360">{{annonce.nom}}
+          </h3>
+          <br>
+          <p><span style="color:#196F3D"><b>poste :</b></span> {{annonce.poste}}
+          </p>
+          <p><span
+            style="color:#196F3D"><b>Experience :</b></span>{{experiences[annonce.experience]}}
+          </p>
+          <p><span
+            style="color:#196F3D"><b>diplome :</b></span>{{annonce.diplome}}
+          </p>
+          <p><span
+            style="color:#196F3D"><b>Niveau :</b></span>{{niveaux[annonce.niveau]}}
+          </p>
+          <p>{{annonce.description}}</p>
+          <button type="button" class="btn btn-warning"
+                  (click)="detailEntreprise($event)">
+            <div hidden>{{annonce.idEntreprise}}</div>
+            Voir le profil de l'annonceur
+          </button>
+        </div>
+        <div class="col-md2 mr-3">
+
+          <div class="card" style="width: 20rem;">
+            <img src="{{annonce.image}}" class="mx-auto img-thumbnail"
+                 height="100px">
+            <div class=" card-body text-center p-3 bg-light">
+              <p style="color:#196F3D"><b>{{annonce.wilaya}}</b></p>
+              <p style="color: #C0392B"><b>{{annonce.telephone}}</b></p>
+              <p><b>{{annonce.entreprise}}</b></p>
+
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
 </div>
 
 

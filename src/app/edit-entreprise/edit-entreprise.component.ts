@@ -44,17 +44,16 @@ export class EditEntrepriseComponent implements OnInit {
   }
 
   creerEntreprise() {
-    let that = this;
     this.api.app.auth().createUserWithEmailAndPassword(this.entreprise.email, this.entreprise.password)
-      .then(function (result) {
-        const newKey = that.api.app.database().ref().child('/entreprise').push().key;
+      .then((result) => {
+        const newKey = this.api.app.database().ref().child('/entreprise').push().key;
         result.user.updateProfile({displayName: 'entreprise', photoURL: newKey});
-        that.entreprise.userId = result.user.uid;
-        that.api.app.database().ref().child('/entreprise').child(newKey).set(that.entreprise);
-        result.user.sendEmailVerification().then(function () {
+        this.entreprise.userId = newKey;
+        this.api.app.database().ref().child('/entreprise').child(newKey).set(this.entreprise);
+        result.user.sendEmailVerification().then( () => {
           alert('Un lien de vérification a été envoyé à votre boite email. Veuillez le confirmer pour pouvoir accéder à votre compte ')
-          that.api.app.auth().signOut();
-          that.router.navigate(['connexion'])
+          this.api.app.auth().signOut();
+          this.router.navigate(['connexion'])
         }).catch(function (error) {
         });
       })
