@@ -21,7 +21,7 @@ export class EditAnnonceComponent implements OnInit {
     wilaya: '',
     telephone: '',
     description: '',
-    image: '',
+    image:  'assets/images/photoProfile.jpg',
     confirm: 'attente',
     entreprise: null,
     domaine: null,

@@ -20,7 +20,7 @@ export class EditEntrepriseComponent implements OnInit {
     telephone: '',
     adresse: '',
     description: '',
-    image: '',
+    image:  'assets/images/photoProfile.jpg',
     annonces: [],
     userId: null
   };
