@@ -3,9 +3,7 @@
   <div class="row">
 
     <div class="col ml-3 mr-3 mt-3 mb-3 ">
-      <h3 style="color:#154360">{{annonce.nom}}
-        <button type="button" class="btn btn-success mr-auto">Postuler</button>
-      </h3>
+      <h3 style="color:#154360">{{annonce.nom}}</h3>
       <br>
       <p><span style="color:#196F3D"><b>poste :</b></span> {{annonce.poste}}</p>
       <p><span
@@ -28,7 +26,38 @@
           <p><b>{{annonce.entreprise}}</b></p>
         </div>
 
+        <table class="table" *ngIf="candidats.length > 0 && api.user === 'entreprise'">
+          <thead>
+          <tr>
+            <th scope="col">Candidat</th>
+            <th scope="col">date de naissance</th>
+            <th scope="col">État</th>
+            <th scope="col">Nombre de candidats</th>
+            <th></th>
+            <th></th>
+            <th></th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr *ngFor="let candidat of candidats">
+            <th scope="row">{{candidat.nom}} {{candidat.prenom}}</th>
+            <td>{{candidat.naissance | date : 'dd/MM/yyyy' }}</td>
+            <td></td>
+            <td>
+              <div *ngIf="annonce.candidats">{{annonce.candidats.length}} candidats</div>
+              <div *ngIf="annonce.candidats == null">Aucun candidat</div>
+            </td>
+            <td> <button class="btn btn-primary" (click)="voirCandidat($event)">Détails</button></td>
+
+            <td [hidden]="true">{{candidat.userId}}</td>
+          </tr>
+
+          </tbody>
+        </table>
+
       </div>
     </div>
   </div>
 </div>
+
+

@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {Annonce} from "../interfaces/annonce";
 import {FirebaseAppService} from "../services/firebase-app.service";
 import {Router} from "@angular/router";
 import {experiences, niveaux} from "../interfaces/constantes";
 import {Entreprise} from "../interfaces/entreprise";
+import {Candidat} from "../interfaces/candidat";
 
 @Component({
   selector: 'app-annonce',
@@ -30,18 +31,26 @@ export class AnnonceComponent implements OnInit {
     idAnnonce: null,
     candidats: []
   };
-  entreprise : Entreprise;
+  entreprise: Entreprise;
   niveaux = niveaux;
   experiences = experiences;
+  candidats: Candidat[] = [];
 
 
   constructor(public api: FirebaseAppService, private router: Router) {
-    const that = this;
     if (this.api.idAnnonce) {
       this.api.app.database().ref().child('annonce').child(this.api.idAnnonce)
-        .once('value', function (snapshot) {
-          that.annonce = snapshot.val();
-        }).catch(function (error) {
+        .once('value', (snapshot) => {
+          this.annonce = snapshot.val();
+        }).then(() =>{
+        for (let key of this.annonce.candidats){
+          this.api.app.database().ref().child('candidat').child(key)
+            .once('value', (snap) => {
+              this.candidats.push(snap.val())
+            })
+        }
+      })
+        .catch(function (error) {
         console.log(error);
       });
     }
@@ -49,5 +58,10 @@ export class AnnonceComponent implements OnInit {
 
   ngOnInit(): void {
   }
-
+  voirCandidat(event) {
+    const userid = event.target.firstChild.textContent;
+    this.api.idCand = userid;
+    localStorage.setItem('candidat', userid);
+    this.router.navigate(['candidat']);
+  }
 }

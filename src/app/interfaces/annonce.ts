@@ -14,5 +14,5 @@ export interface Annonce {
   domaine: string
   idAnnonce: string
   idEntreprise: string
-  candidats: string[]
+  candidats: any[]
 }

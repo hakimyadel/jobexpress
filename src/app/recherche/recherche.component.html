@@ -63,7 +63,9 @@
 
       <div class="col ml-3 mr-3 mt-3 mb-3 ">
         <h3 style="color:#154360">{{annonce.nom}}
-          <button type="button" class="btn btn-success mr-auto">Postuler</button>
+          <button type="button" class="btn btn-success mr-auto" (click)="postuler($event)">
+            <div hidden>{{annonce.idAnnonce}}</div>
+            Postuler</button>
         </h3>
         <br>
         <p><span style="color:#196F3D"><b>poste :</b></span> {{annonce.poste}}</p>
@@ -76,7 +78,9 @@
           style="color:#196F3D"><b>Niveau :</b></span>{{niveaux[annonce.niveau]}}
         </p>
         <p>{{annonce.description}}</p>
-        <button type="button" class="btn btn-warning">Voir le profil de l'annonceur</button>
+        <button type="button" class="btn btn-warning" (click)="detailEntreprise($event)">
+          <div hidden>{{annonce.idEntreprise}}</div>
+          Voir le profil de l'annonceur</button>
       </div>
       <div class="col-md2 mr-3">
 

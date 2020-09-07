@@ -53,7 +53,7 @@ export class EditCandidatComponent implements OnInit {
       .then(function (result) {
         const newKey = that.api.app.database().ref().child('/candidat').push().key;
         result.user.updateProfile({displayName: 'candidat', photoURL: newKey});
-        that.candidat.userId = result.user.uid;
+        that.candidat.userId = newKey;
         that.api.app.database().ref().child('/candidat').child(newKey).set(that.candidat);
         result.user.sendEmailVerification().then(function () {
           alert('Un lien de vérification a été envoyé à votre boite email. Veuillez le confirmer pour pouvoir accéder à votre compte ')

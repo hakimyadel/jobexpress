@@ -60,18 +60,28 @@ export class RechercheComponent implements OnInit {
     }
   }
 
-  detailAnnonce(event) {
-    const cleAnnonce = event.target.firstChild.textContent;
-    this.api.idAnnonce = cleAnnonce;
-    localStorage.setItem('annonce' , cleAnnonce);
-    this.router.navigate(['annonce']);
-  }
-
   detailEntreprise(event) {
     const cleEntreprise = event.target.firstChild.textContent;
     this.api.idEnt = cleEntreprise;
     localStorage.setItem('entreprie' , cleEntreprise);
     this.router.navigate(['entreprise']);
 
+  }
+
+  postuler(event) {
+    let candidats ;
+    const cleAnnonce = event.target.firstChild.textContent;
+    this.api.app.database().ref('/annonce').child(cleAnnonce).child('candidats')
+      .once("value", (data) => {
+      candidats = data.val();
+      if(candidats == null){
+        candidats =[];
+      }
+      candidats.push(this.api.idCand);
+      this.api.app.database().ref().child('annonce').child(cleAnnonce)
+          .child('candidats').set(candidats);
+        alert('Votre candidature a bien été envoyée');
+        this.router.navigate(['candidat']);
+    })
   }
 }
