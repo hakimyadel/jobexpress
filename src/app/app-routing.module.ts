@@ -13,6 +13,7 @@ import {AuthCandidatService} from "./services/auth-candidat.service";
 import {AnnoncesEntrepriseComponent} from "./annonces-entreprise/annonces-entreprise.component";
 import {AdminComponent} from "./admin/admin.component";
 import {ModifierPasswordComponent} from "./modifier-password/modifier-password.component";
+import {ReinitialiserPasswordComponent} from "./reinitialiser-password/reinitialiser-password.component";
 
 const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
@@ -26,6 +27,7 @@ const routes: Routes = [
   { path: 'candidat', canActivate: [AuthCandidatService], component: CandidatComponent },
   { path: 'entreprise', component: EntrepriseComponent },
   { path: 'mesAnnonces', component: AnnoncesEntrepriseComponent },
+  { path: 'init/password', component: ReinitialiserPasswordComponent },
   { path: 'edit/password', component: ModifierPasswordComponent },
   { path: 'admin', component: AdminComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
