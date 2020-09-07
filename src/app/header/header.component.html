@@ -54,7 +54,7 @@
         </div>
       </li>
 
-      <li class="nav-item " *ngIf="api.user == null">
+      <li class="nav-item " *ngIf="!(api.user === 'candidat' ||api.user === 'entreprise' || api.user === 'admin')">
         <a class="nav-link" routerLink="connexion" >Se connecter</a>
       </li>
 

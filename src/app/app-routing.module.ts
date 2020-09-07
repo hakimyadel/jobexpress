@@ -14,22 +14,24 @@ import {AnnoncesEntrepriseComponent} from "./annonces-entreprise/annonces-entrep
 import {AdminComponent} from "./admin/admin.component";
 import {ModifierPasswordComponent} from "./modifier-password/modifier-password.component";
 import {ReinitialiserPasswordComponent} from "./reinitialiser-password/reinitialiser-password.component";
+import {AuthEntrepriseService} from "./services/auth-entreprise.service";
+import {AuthCandidatEntrepriseService} from "./services/auth-candidat-entreprise.service";
+import {AuthAdminService} from "./services/auth-admin.service";
 
 const routes: Routes = [
   { path: 'connexion', component: ConnexionComponent },
   { path: 'accueil', component: AccueilComponent },
-  { path: 'edit/annonce', component: EditAnnonceComponent },
+  { path: 'edit/annonce', canActivate: [AuthEntrepriseService], component: EditAnnonceComponent },
   { path: 'edit/candidat', component: EditCandidatComponent },
   { path: 'edit/entreprise', component: EditEntrepriseComponent },
-  { path: 'recherche', component: RechercheComponent },
-  //{ path: 'annonce', canActivate: [AuthGuardService], component: AnnonceComponent },
-  { path: 'annonce', component: AnnonceComponent },
-  { path: 'candidat', canActivate: [AuthCandidatService], component: CandidatComponent },
-  { path: 'entreprise', component: EntrepriseComponent },
-  { path: 'mesAnnonces', component: AnnoncesEntrepriseComponent },
+  { path: 'recherche', canActivate: [AuthCandidatService], component: RechercheComponent },
+  { path: 'annonce', canActivate: [AuthEntrepriseService], component: AnnonceComponent },
+  { path: 'candidat', canActivate: [AuthCandidatEntrepriseService], component: CandidatComponent },
+  { path: 'entreprise', canActivate: [AuthCandidatEntrepriseService], component: EntrepriseComponent },
+  { path: 'mesAnnonces', canActivate: [AuthEntrepriseService], component: AnnoncesEntrepriseComponent },
   { path: 'init/password', component: ReinitialiserPasswordComponent },
-  { path: 'edit/password', component: ModifierPasswordComponent },
-  { path: 'admin', component: AdminComponent },
+  { path: 'edit/password', canActivate: [AuthCandidatEntrepriseService], component: ModifierPasswordComponent },
+  { path: 'admin', canActivate: [AuthAdminService], component: AdminComponent },
   { path: '', redirectTo: 'accueil', pathMatch: 'full' },
   { path: '**', redirectTo: 'accueil' }
 ];
