@@ -33,7 +33,7 @@
       </li>
 
       <li *ngIf="api.user === 'entreprise'" class="nav-item">
-        <a class="nav-link" routerLink="edit/annonce">Ajouter une annonce</a>
+        <a class="nav-link" (click)="AjouterAnnonce()">Ajouter une annonce</a>
       </li>
 
       <li *ngIf="api.user === 'entreprise'" class="nav-item">

@@ -56,11 +56,10 @@
         <td>{{candidat.telephone}}</td>
         <td>
           <button class="btn btn-primary" (click)="voirCandidat($event)">
+            <div hidden>{{candidat.userId}}</div>
             Détails
           </button>
         </td>
-
-        <td [hidden]="true">{{candidat.userId}}</td>
       </tr>
 
       </tbody>

@@ -27,4 +27,10 @@ export class HeaderComponent implements OnInit {
     this.router.navigate(['connexion']);
   }
 
+  AjouterAnnonce() {
+    this.api.idAnnonce = null;
+    localStorage.setItem('annonce', null);
+    this.router.navigate(['edit/annonce']);
+  }
+
 }
