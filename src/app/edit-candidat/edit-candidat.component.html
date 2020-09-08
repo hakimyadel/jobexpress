@@ -153,10 +153,10 @@
 
 
     <button type="submit" *ngIf="api.user != 'candidat'"
-            [disabled]="!(candidatForm.form.valid && candidat.password === confirmPassword)"
+            [disabled]="!(candidatForm.form.valid && candidat.password === confirmPassword) || chargement"
             class="btn btn-primary mx-auto">Créer le profile
     </button>
-    <button *ngIf="api.user === 'candidat'" [disabled]="!(candidatForm.form.valid )"
+    <button *ngIf="api.user === 'candidat'" [disabled]="!(candidatForm.form.valid ) || chargement"
             class="btn btn-primary mx-auto" (click)="updateProfile()">Mettre à jour le profile</button>
 
   </form>

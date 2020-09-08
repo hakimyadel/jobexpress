@@ -31,6 +31,7 @@ export class EditCandidatComponent implements OnInit {
   niveaux = niveaux;
   experiences = experiences;
   confirmPassword: string;
+  chargement = false;
 
   constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
@@ -68,19 +69,18 @@ export class EditCandidatComponent implements OnInit {
   }
 
   uploadFile(event) {
-    const that = this
     const file = event.target.files[0];
     const almostUniqueFileName = Date.now().toString();
     const upload = this.api.app.storage().ref()
       .child('images/' + almostUniqueFileName + file.name).put(file);
-    upload.on('state_changed', function (snapshot) {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
-    }, function (error) {
+    upload.on('state_changed', (snapshot) => {
+      this.chargement = true;
+    }, (error) => {
       console.log(error)
-    }, function () {
-      upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
-        that.candidat.image = downloadURL
+    }, () => {
+      upload.snapshot.ref.getDownloadURL().then( (downloadURL) => {
+        this.candidat.image = downloadURL;
+        this.chargement = false;
       });
     });
   }

@@ -106,12 +106,12 @@
       </div>
 
       <button type="submit" *ngIf="api.idAnnonce == null"
-              [disabled]="!(annonceForm.form.valid )"
+              [disabled]="!(annonceForm.form.valid ) || chargement"
               class="btn btn-primary mx-auto">Poster l'annonce
       </button>
 
       <button *ngIf="api.idAnnonce"
-              [disabled]="!(annonceForm.form.valid )"
+              [disabled]="!(annonceForm.form.valid) || chargement"
               class="btn btn-primary mx-auto" (click)="updateAnnonce()">Mettre à
         jour l'annonce
       </button>

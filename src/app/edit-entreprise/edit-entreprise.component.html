@@ -118,10 +118,10 @@
         <label for="controleFile">Ajouter une image a votre profil</label>
       </div>
       <button type="submit" *ngIf="api.user != 'entreprise'"
-              [disabled]="!(entrepriseForm.form.valid && entreprise.password === confirmPassword)"
+              [disabled]="!(entrepriseForm.form.valid && entreprise.password === confirmPassword) || chargement"
               class="btn btn-primary mx-auto">Créer le profile
       </button>
-      <button *ngIf="api.user === 'entreprise'" [disabled]="!(entrepriseForm.form.valid )"
+      <button *ngIf="api.user === 'entreprise'" [disabled]="!(entrepriseForm.form.valid ) || chargement"
               class="btn btn-primary mx-auto" (click)="updateProfile()">Mettre à jour le profile</button>
 
   </form>

@@ -33,6 +33,7 @@ export class EditAnnonceComponent implements OnInit {
   niveaux = niveaux;
   diplomes = diplomes;
   experiences = experiences;
+  chargement = false;
 
 
   constructor(public api: FirebaseAppService, private router: Router) {
@@ -74,13 +75,13 @@ export class EditAnnonceComponent implements OnInit {
     const upload = this.api.app.storage().ref()
       .child('images/' + almostUniqueFileName + file.name).put(file);
     upload.on('state_changed',  (snapshot) => {
-      var progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
-      console.log('Upload is ' + progress + '% done');
+      this.chargement = true;
     }, (error) => {
       console.log(error)
     },  () => {
       upload.snapshot.ref.getDownloadURL().then((downloadURL) => {
         this.annonce.image = downloadURL
+        this.chargement =false;
       });
     });
   }
