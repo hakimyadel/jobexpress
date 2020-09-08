@@ -1,7 +1,4 @@
 export const wilayas = [
-  'tlemcen',
-  'alger',
-  'oran',
   'adrar',
   'chlef',
   'laghouat',
@@ -14,8 +11,10 @@ export const wilayas = [
   'bouira',
   'tamanrassat',
   'tébessa',
+  'tlemcen',
   'tiaret',
   'tizi ouzou',
+  'alger',
   'djelfa',
   'jijel',
   'setif',
@@ -30,6 +29,7 @@ export const wilayas = [
   'm\'sila',
   'mascara',
   'ouregla',
+  'oran',
   'el bayadh',
   'illizi',
   'bordj bou arreridj',
@@ -72,7 +72,6 @@ export const domaines =[
   'techenique',
   'scientifique',
   'gestion',
-
 ];
 
 export const diplomes =[
@@ -91,5 +90,4 @@ export const diplomes =[
   'marketing',
   'marketing digital',
   'linguistiques',
-
 ];
