@@ -79,7 +79,7 @@ export class EditAnnonceComponent implements OnInit {
     }, (error) => {
       console.log(error)
     },  () => {
-      upload.snapshot.ref.getDownloadURL().then(function (downloadURL) {
+      upload.snapshot.ref.getDownloadURL().then((downloadURL) => {
         this.annonce.image = downloadURL
       });
     });
