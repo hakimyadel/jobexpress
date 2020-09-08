@@ -40,13 +40,15 @@
         <a class="nav-link" routerLink="entreprise">Mon profile</a>
       </li>
 
-      <li *ngIf="api.user == null" class="nav-item dropdown ">
+      <li
+        *ngIf="!(api.user === 'candidat' ||api.user === 'entreprise' || api.user === 'admin')"
+        class="nav-item dropdown ">
         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown"
            role="button" data-toggle="dropdown" aria-haspopup="true"
            aria-expanded="false">
           Créé un compte
         </a>
-        <div  class="dropdown-menu" aria-labelledby="navbarDropdown">
+        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
           <a class="dropdown-item" routerLink="edit/entreprise">autant
             qu'entreprise</a>
           <a class="dropdown-item" routerLink="edit/candidat">autant que
@@ -54,13 +56,15 @@
         </div>
       </li>
 
-      <li class="nav-item " *ngIf="!(api.user === 'candidat' ||api.user === 'entreprise' || api.user === 'admin')">
-        <a class="nav-link" routerLink="connexion" >Se connecter</a>
+      <li class="nav-item "
+          *ngIf="!(api.user === 'candidat' ||api.user === 'entreprise' || api.user === 'admin')">
+        <a class="nav-link" routerLink="connexion">Se connecter</a>
       </li>
 
-      <li class="nav-item " *ngIf="api.user === 'candidat' ||api.user === 'entreprise' || api.user === 'admin' " >
+      <li class="nav-item "
+          *ngIf="api.user === 'candidat' ||api.user === 'entreprise' || api.user === 'admin' ">
         <a class="nav-link" (click)="seDeconnecter()"
-           >Se déconnecter</a>
+        >Se déconnecter</a>
       </li>
 
     </ul>

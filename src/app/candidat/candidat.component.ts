@@ -31,7 +31,7 @@ export class CandidatComponent implements OnInit {
     userId: null
   }
 
-  constructor(private api: FirebaseAppService, private router: Router) {
+  constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
     this.api.app.database().ref().child('candidat').child(this.api.idCand)
       .once('value',function (snapshot) {

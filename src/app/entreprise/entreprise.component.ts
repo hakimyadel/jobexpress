@@ -26,7 +26,7 @@ export class EntrepriseComponent implements OnInit {
     userId: null
   }
 
-  constructor(private api: FirebaseAppService, private router: Router) {
+  constructor(public api: FirebaseAppService, private router: Router) {
     const that = this;
     this.api.app.database().ref().child('entreprise').child(this.api.idEnt)
       .on('value', function (snapshot) {
