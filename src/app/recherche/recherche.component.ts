@@ -11,7 +11,6 @@ import {Router} from "@angular/router";
 })
 export class RechercheComponent implements OnInit {
 
-  data: Annonce[] = [];
   annonces : Annonce[] = [];
   wilayas = wilayas;
   niveaux = niveaux;
@@ -26,23 +25,23 @@ export class RechercheComponent implements OnInit {
   postule = false;
 
   constructor(private api: FirebaseAppService, private router: Router) {
-    this.api.app.database().ref('/annonce').orderByChild("confirm")
-      .equalTo('accepte').on("child_added", (data) => {
-      this.data.push(data.val());
-      if(data.val().candidats == null|| !data.val().candidats.includes(this.api.idCand)){
-        this.annonces.push(data.val());
-      }
-    })
+    this.refresh();
   }
 
   ngOnInit(): void {
   }
 
+  refresh(){
+    this.annonces = [];
+    this.api.app.database().ref('/annonce').orderByChild("confirm")
+      .equalTo('accepte').on("child_added", (data) => {
+      this.annonces.push(data.val());
+    })
+  }
+
   recherche(){
     this.postule = false;
-    this.annonces = this.data.filter(a =>
-      a.candidats == null || !a.candidats.includes(this.api.idCand)
-    );
+    this.refresh();
     this.annonces = this.annonces.filter(a =>
       a.nom.includes(this.texteRech)
       || a .poste.includes(this.texteRech)
@@ -60,17 +59,18 @@ export class RechercheComponent implements OnInit {
     }
     if(this.niveauRech != 'tous'){
       this.annonces = this.annonces.filter(a =>
-        a.niveau >= parseInt(this.niveauRech))
+        a.niveau <= parseInt(this.niveauRech))
     }
     if(this.experienceRech != 'tous'){
       this.annonces = this.annonces.filter(a =>
-        a.experience >= parseInt(this.experienceRech))
+        a.experience <= parseInt(this.experienceRech))
     }
   }
 
   chargerPostuleCandidat(){
     this.postule = true;
-    this.annonces = this.data.filter(a =>
+    this.refresh();
+    this.annonces = this.annonces.filter(a =>
       a.candidats != null && a.candidats.includes(this.api.idCand)
     );
   }
@@ -80,7 +80,6 @@ export class RechercheComponent implements OnInit {
     this.api.idEnt = cleEntreprise;
     localStorage.setItem('entreprie' , cleEntreprise);
     this.router.navigate(['entreprise']);
-
   }
 
   postuler(event) {
@@ -96,7 +95,7 @@ export class RechercheComponent implements OnInit {
       this.api.app.database().ref().child('annonce').child(cleAnnonce)
           .child('candidats').set(candidats);
         alert('Votre candidature a bien été envoyée');
-        this.router.navigate(['candidat']);
+        event.target.disabled = true;
     })
   }
 }

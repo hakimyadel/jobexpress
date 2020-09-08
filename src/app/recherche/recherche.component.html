@@ -53,10 +53,14 @@
                     value="{{i}}">{{niveau}}</option>
           </select>
         </div>
-      </form><br>
-      <h6 style="color: darkred">clickez ici pour voir les annonces dont vous avez posulé !</h6><br>
+      </form>
+      <br>
+      <h6 style="color: darkred">clickez ici pour voir les annonces dont vous
+        avez posulé !</h6><br>
 
-      <button (click)="chargerPostuleCandidat()" class="btn btn-primary">Voir mes postulats</button>
+      <button (click)="chargerPostuleCandidat()" class="btn btn-primary">Voir
+        mes postulats
+      </button>
     </div>
   </div>
 
@@ -69,7 +73,8 @@
 
         <div class="col ml-3 mr-3 mt-3 mb-3 ">
           <h3 style="color:#154360">{{annonce.nom}}
-            <button type="button" class="btn btn-success mr-auto"
+            <button [disabled]=" !(annonce.candidats == null || !annonce.candidats.includes(api.idCand))"
+                    type="button" class="btn btn-success mr-auto"
                     (click)="postuler($event)">
               <div hidden>{{annonce.idAnnonce}}</div>
               Postuler
@@ -112,7 +117,7 @@
     </div>
   </div>
 
-  <div  *ngIf="postule" class="col-8  mt-5">
+  <div *ngIf="postule" class="col-8  mt-5">
     <h2>Mes postulats</h2>
     <div *ngFor="let annonce of annonces"
          class="card mt-3 shadow p-3  bg-white rounded "
