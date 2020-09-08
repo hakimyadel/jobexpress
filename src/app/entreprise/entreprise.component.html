@@ -2,7 +2,8 @@
   <img class="rounded-circle mx-auto mt-3"
        src="{{entreprise.image}}" alt="{{entreprise.nom}}" height="200">
   <div class="card-body">
-    <h5 class="card-title">{{entreprise.nom}}</h5><br>
+    <h5 class="card-title">{{entreprise.nom}}</h5>
+    <button type="button" class="btn btn-outline-warning" (click)="voirAnnonces()">Mes annonces</button><br><br>
     <p class="card-text">{{entreprise.description}}</p><br>
     <p><b>Date de création</b> : {{entreprise.creation}}</p>
     <p><b>Domaine</b> : {{entreprise.domaine}}</p>
@@ -10,17 +11,15 @@
     <p><b>Adresse</b> : {{entreprise.adresse}}</p>
     <p><b>Numero de téléphone</b> : {{entreprise.telephone}}</p>
     <br><br>
-    <button type="button" class="btn btn-outline-dark"
+    <button type="button" class="btn btn-info"
             (click)="editerProfile()">Modifier mon profil
     </button>&nbsp;
-    <button type="button" class="btn btn-outline-dark"
+    <button type="button" class="btn btn-dark"
             (click)="modifierPasword()">Modifier mon mot de passe
+    </button><br><br>
+    <button type="button" class="btn btn-danger" (click)="supprimerProfile()">Supprimer mon profil
     </button>
-    <button type="button" class="btn btn-outline-danger" (click)="supprimerProfile()">Supprimer mon profil
-    </button>
-    <button type="button" class="btn btn-outline-danger"
-    (click)="voirAnnonces()">Mes annonces
-    </button>
+
     <br><br>
   </div>
 

@@ -1,7 +1,53 @@
 export const wilayas = [
   'tlemcen',
   'alger',
-  'oran' // à completer
+  'oran',
+  'adrar',
+  'chlef',
+  'laghouat',
+  'oum el bouaghi',
+  'batna',
+  'bédjaïa',
+  'biskra',
+  'béchar',
+  'blida',
+  'bouira',
+  'tamanrassat',
+  'tébessa',
+  'tiaret',
+  'tizi ouzou',
+  'djelfa',
+  'jijel',
+  'setif',
+  'saïda',
+  'skikda',
+  'sidi bel abbès',
+  'annaba',
+  'guelma',
+  'constantine',
+  'médéa',
+  'mostaganem',
+  'm\'sila',
+  'mascara',
+  'ouregla',
+  'el bayadh',
+  'illizi',
+  'bordj bou arreridj',
+  'boumerdès',
+  'el tarf',
+  'tindouf',
+  'tissemsit',
+  'el oued',
+  'khenchela',
+  'souk ahras',
+  'tipaza',
+  'mila',
+  'aïn defla',
+  'naama',
+  'aïn temouchent',
+  'ghardaïa',
+  'relizane'
+
 ];
 
 export const niveaux = [
@@ -23,19 +69,27 @@ export const experiences = [
   'Cinq ans et plus'
 ]
 export const domaines =[
-  'informatique',
-  'biologie',
-  'médical',
-  'mécanique',
-  'agronomie',
-  'electronique',
-  'marketing',
-  'infographie',
+  'techenique',
+  'scientifique',
   'gestion',
+
 ];
 
 export const diplomes =[
-  'licence',
-  'master',
-  'docorat'
+  'pas de diplome',
+  ' informatique',
+  ' mécanique',
+  'comptabilité',
+  'médecine',
+  'médecine dentaire',
+  'science pharmacetique',
+  'science biologique',
+  'electronique',
+  'énergie renouvelable',
+  'agro-alimentaire',
+  'automatique',
+  'marketing',
+  'marketing digital',
+  'linguistiques',
+
 ];
