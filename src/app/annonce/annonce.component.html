@@ -27,37 +27,44 @@
         </div>
 
 
-
       </div>
     </div>
   </div>
 </div>
-<h3 class="text-center">la liste des condidat qui ont postulé a cette annonce :</h3><br>
-<div class="card mx-auto" style="width: 50rem;">
-<table class="table" *ngIf="candidats.length > 0 && api.user === 'entreprise'">
-  <thead>
-  <tr>
-    <th scope="col">Candidat</th>
-    <th scope="col">date de naissance</th>
-    <th scope="col">Email</th>
-    <th scope="col">Telephone</th>
-    <th></th>
-    <th></th>
-    <th></th>
-  </tr>
-  </thead>
-  <tbody>
-  <tr *ngFor="let candidat of candidats">
-    <th scope="row">{{candidat.nom}} {{candidat.prenom}}</th>
-    <td>{{candidat.naissance | date : 'dd/MM/yyyy' }}</td>
-    <td>{{candidat.email}}</td>
-    <td>{{candidat.telephone}}</td>
-    <td> <button class="btn btn-primary" (click)="voirCandidat($event)">Détails</button></td>
+<div *ngIf="api.user === 'entreprise'">
+  <h3 class="text-center">la liste des condidat qui ont postulé a cette annonce
+    :</h3><br>
+  <div class="card mx-auto" style="width: 50rem;">
+    <table class="table"
+           *ngIf="candidats.length > 0 && api.user === 'entreprise'">
+      <thead>
+      <tr>
+        <th scope="col">Candidat</th>
+        <th scope="col">date de naissance</th>
+        <th scope="col">Email</th>
+        <th scope="col">Telephone</th>
+        <th></th>
+        <th></th>
+        <th></th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let candidat of candidats">
+        <th scope="row">{{candidat.nom}} {{candidat.prenom}}</th>
+        <td>{{candidat.naissance | date : 'dd/MM/yyyy' }}</td>
+        <td>{{candidat.email}}</td>
+        <td>{{candidat.telephone}}</td>
+        <td>
+          <button class="btn btn-primary" (click)="voirCandidat($event)">
+            Détails
+          </button>
+        </td>
 
-    <td [hidden]="true">{{candidat.userId}}</td>
-  </tr>
+        <td [hidden]="true">{{candidat.userId}}</td>
+      </tr>
 
-  </tbody>
-</table>
+      </tbody>
+    </table>
+  </div>
 </div>
 

@@ -3,7 +3,7 @@
        src="{{entreprise.image}}" alt="{{entreprise.nom}}" height="200">
   <div class="card-body">
     <h5 class="card-title">{{entreprise.nom}}</h5>
-    <button type="button" class="btn btn-outline-warning" (click)="voirAnnonces()">Mes annonces</button><br><br>
+    <button *ngIf="api.user === 'entreprise'" type="button" class="btn btn-outline-warning" (click)="voirAnnonces()">Mes annonces</button><br><br>
     <p class="card-text">{{entreprise.description}}</p><br>
     <p><b>Date de création</b> : {{entreprise.creation}}</p>
     <p><b>Domaine</b> : {{entreprise.domaine}}</p>
@@ -11,6 +11,7 @@
     <p><b>Adresse</b> : {{entreprise.adresse}}</p>
     <p><b>Numero de téléphone</b> : {{entreprise.telephone}}</p>
     <br><br>
+    <div *ngIf="api.user === 'entreprise'">
     <button type="button" class="btn btn-info"
             (click)="editerProfile()">Modifier mon profil
     </button>&nbsp;
@@ -19,7 +20,7 @@
     </button><br><br>
     <button type="button" class="btn btn-danger" (click)="supprimerProfile()">Supprimer mon profil
     </button>
-
+    </div>
     <br><br>
   </div>
 

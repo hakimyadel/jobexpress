@@ -12,15 +12,18 @@
     <p><b>Wilaya de résidence</b> : {{candidat.wilaya}}</p>
     <p><b>Numero de téléphone</b> : {{candidat.telephone}}</p>
     <br><br>
-    <button type="button" class="btn btn-info"
-            (click)="editerProfile()">Modifier mon profil
-    </button>&nbsp;
-    <button type="button" class="btn btn-info"
-            (click)="modifierPasword()">Modifier mon mot de passe
-    </button><br><br>
-    <button type="button" class="btn btn-danger "
-            (click)="supprimerProfile()">Supprimer mon profil
-    </button>
+    <div *ngIf="api.user === 'candidat'">
+      <button type="button" class="btn btn-info"
+              (click)="editerProfile()">Modifier mon profil
+      </button>&nbsp;
+      <button type="button" class="btn btn-info"
+              (click)="modifierPasword()">Modifier mon mot de passe
+      </button><br><br>
+      <button type="button" class="btn btn-danger "
+              (click)="supprimerProfile()">Supprimer mon profil
+      </button>
+    </div>
+
   </div>
 </div>
 

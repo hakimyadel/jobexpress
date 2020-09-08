@@ -25,7 +25,7 @@ const routes: Routes = [
   { path: 'edit/candidat', component: EditCandidatComponent },
   { path: 'edit/entreprise', component: EditEntrepriseComponent },
   { path: 'recherche', canActivate: [AuthCandidatService], component: RechercheComponent },
-  { path: 'annonce', canActivate: [AuthEntrepriseService], component: AnnonceComponent },
+  { path: 'annonce', component: AnnonceComponent },
   { path: 'candidat', canActivate: [AuthCandidatEntrepriseService], component: CandidatComponent },
   { path: 'entreprise', canActivate: [AuthCandidatEntrepriseService], component: EntrepriseComponent },
   { path: 'mesAnnonces', canActivate: [AuthEntrepriseService], component: AnnoncesEntrepriseComponent },
